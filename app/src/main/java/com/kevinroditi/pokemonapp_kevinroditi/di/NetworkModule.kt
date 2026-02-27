@@ -27,7 +27,7 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideLoggingInterceptor(): HttpLoggingInterceptor =
-        HttpLoggingInterceptor().apply{
+        HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
@@ -40,7 +40,7 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor
-    ): OkHttpClient{
+    ): OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
@@ -58,7 +58,7 @@ object NetworkModule {
 
     fun provideRetrofit(
         okHttpClient: OkHttpClient
-    ): Retrofit{
+    ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
@@ -73,7 +73,8 @@ object NetworkModule {
     @Singleton
     fun providePokeApiService(
         retrofit: Retrofit
-    ): PokeApiService{
+    ): PokeApiService {
         return retrofit.create(PokeApiService::class.java)
 
+    }
 }
