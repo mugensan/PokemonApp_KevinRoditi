@@ -1,4 +1,4 @@
-package cl.abaqus.pace.portfolio.cl.abaqus.pace.portfolio
+package com.kevinroditi.pokemonapp_kevinroditi
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

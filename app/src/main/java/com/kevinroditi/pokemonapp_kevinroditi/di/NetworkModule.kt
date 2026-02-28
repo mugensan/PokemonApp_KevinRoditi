@@ -1,29 +1,28 @@
 package com.kevinroditi.pokemonapp_kevinroditi.di
 
+import com.kevinroditi.pokemonapp_kevinroditi.data.remote.api.PokeApiService
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
+
 /**
  * Provides network related dependencies
- *
- * Responsabilities:
- * - Config. OkhttpClient
- * - Config. Retrofit
- * - Provide API service
- *
- * Architecture:
- * - Installed in SingletonComponent to ensure single instance
- *   accross entire app lifecycle
- *
- *   Why singleton:
- *   - Retrofit and OkHttp are expensive to create
- *   - They should be shared
  */
-
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://pokeapi.co/api/"
+    private const val BASE_URL = "https://pokeapi.co/api/v2/"
 
-    // Provides HTTP logging interceptor
     @Provides
     @Singleton
     fun provideLoggingInterceptor(): HttpLoggingInterceptor =
@@ -31,11 +30,6 @@ object NetworkModule {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
-    /** Provides OkHttp client
-     * Config:
-     * - 30s timeouts for reliability
-     * - Logging interceptor
-     */
     @Provides
     @Singleton
     fun provideOkHttpClient(
@@ -49,32 +43,32 @@ object NetworkModule {
             .build()
     }
 
-    /**
-     * Provides Retrofit instance
-     *
-     * Using Moshi for JSON parsing
-     * Lightweight and Kotlin friendly
-     */
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+    }
 
+    @Provides
+    @Singleton
     fun provideRetrofit(
-        okHttpClient: OkHttpClient
+        okHttpClient: OkHttpClient,
+        moshi: Moshi
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }
 
-    /**
-     * Provides API service impl.
-     */
     @Provides
     @Singleton
     fun providePokeApiService(
         retrofit: Retrofit
     ): PokeApiService {
         return retrofit.create(PokeApiService::class.java)
-
     }
 }

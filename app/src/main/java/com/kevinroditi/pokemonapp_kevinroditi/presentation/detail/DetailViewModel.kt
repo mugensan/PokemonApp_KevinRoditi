@@ -1,75 +1,48 @@
 package com.kevinroditi.pokemonapp_kevinroditi.presentation.detail
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.kevinroditi.pokemonapp_kevinroditi.core.util.Resource
+import com.kevinroditi.pokemonapp_kevinroditi.domain.usecase.GetPokemonDetailUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * VM for DetailScreen
- *
- * Responsibilities:
- * - Fetch Pokémon detail
- * - Expose UI state via StateFlow
- * - Handle loading and error states
- *
- * Architecture:
- * - Uses UseCase not repo directly
- * - Exposes immutable state to UI
- * - Lifecycle aware via viewModelScope
- *
- * Why stateFlow instead of LiveDate?
- * - Coroutine native
- * - Better Compose integration
- * - More predictable state management
  */
-
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val getPokemonDetailUseCase: GetPokemonDetailUseCase
 ) : ViewModel() {
 
-    private val _uistate = MutableStateFlow<DetailUiState>(DetailUiState())
+    private val _uiState = MutableStateFlow(DetailUiState())
+    val uiState: StateFlow<DetailUiState> = _uiState.asStateFlow()
 
-    /**
-     * Public inmutable state exposed to UI
-     *
-     * This prevents UI from modifying state
-     */
-    val uiState: StateFlow<DetailUiState> = _uistate.asStateFlow()
-
-    /**
-     * Fetch Pokemon detail
-     *
-     * Called from UI when entering screen
-     */
     fun loadPokemon(name: String) {
         viewModelScope.launch {
-
-            // Setting loading state first
-            _uistate.value = DetailUiState(
-                isLoading = true
-            )
+            _uiState.value = _uiState.value.copy(isLoading = true, error = null)
 
             when (val result = getPokemonDetailUseCase(name)) {
                 is Resource.Success -> {
-                    _uistate.value = DetailUiState(
+                    _uiState.value = _uiState.value.copy(
                         isLoading = false,
-                        pokemon = result.data
+                        pokemon = result.value
                     )
                 }
-
                 is Resource.Error -> {
-                    _uistate.value = DetailUiState(
+                    _uiState.value = _uiState.value.copy(
                         isLoading = false,
                         error = result.message
                     )
                 }
-
                 is Resource.Loading -> {
-                    _uistate.value = DetailUiState(
-                        isLoading = true
-                    )
+                    _uiState.value = _uiState.value.copy(isLoading = true)
                 }
             }
         }
-
     }
 }

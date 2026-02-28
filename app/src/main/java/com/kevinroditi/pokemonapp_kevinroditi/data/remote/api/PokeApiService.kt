@@ -1,6 +1,10 @@
 package com.kevinroditi.pokemonapp_kevinroditi.data.remote.api
 
 import com.kevinroditi.pokemonapp_kevinroditi.data.remote.dto.PokemonlistResponseDto
+import com.kevinroditi.pokemonapp_kevinroditi.data.remote.dto.PokemonDetailDto
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  * Retrofit service def. for PokeAPI
@@ -29,6 +33,6 @@ interface PokeApiService {
     @GET("pokemon/{name}")
     suspend fun getPokemonDetail(
         @Path("name") name: String
-    ):PokemonDetailDto
+    ): PokemonDetailDto
 
 }

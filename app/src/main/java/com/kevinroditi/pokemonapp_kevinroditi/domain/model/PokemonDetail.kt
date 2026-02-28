@@ -26,7 +26,7 @@ data class PokemonDetail(
 /**
  * SEPERATING FOR CLARITY AND UI MAPPING
  */
-data class stat(
+data class Stat(
     val name: String,
     val value: Int
 )

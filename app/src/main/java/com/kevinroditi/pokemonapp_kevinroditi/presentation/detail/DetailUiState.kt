@@ -1,7 +1,9 @@
 package com.kevinroditi.pokemonapp_kevinroditi.presentation.detail
 
+import com.kevinroditi.pokemonapp_kevinroditi.domain.model.PokemonDetail
+
 /**
- * Encouraging single source of truth
+ * UI State for the Detail Screen
  */
 data class DetailUiState(
     val isLoading: Boolean = false,

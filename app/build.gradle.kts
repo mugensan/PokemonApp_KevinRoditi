@@ -50,7 +50,18 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force("org.jetbrains.kotlin:kotlin-reflect:2.0.21")
+    }
+}
+
 dependencies {
+    constraints {
+        implementation("androidx.core:core:1.15.0")
+        implementation("androidx.core:core-ktx:1.15.0")
+    }
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -59,7 +70,6 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.core.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -110,7 +120,10 @@ dependencies {
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
 
     // Palette
-    implementation("androidx.palette:palette-ktx:1.1.1")
+    implementation(libs.androidx.palette.ktx)
+
+    // Coil
+    implementation(libs.coil.compose)
 
     // Unit Testing
     testImplementation("org.mockito:mockito-core:5.14.2")

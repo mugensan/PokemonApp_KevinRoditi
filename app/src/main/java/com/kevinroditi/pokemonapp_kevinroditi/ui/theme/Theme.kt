@@ -1,12 +1,12 @@
 package com.kevinroditi.pokemonapp_kevinroditi.ui.theme
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Typography
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.Composable
+
 /**
  * Modern Material3 theme setup
- *
- * Why:
- * - Latest UI trend
- * - Better color system
- * - Dynamic theming ready
  */
 @Composable
 fun PokeAppApplicationTheme(
