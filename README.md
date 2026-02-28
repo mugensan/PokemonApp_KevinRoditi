@@ -1,7 +1,12 @@
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/bb2684c9-1f90-4c4c-b912-7aac0de15663" width="300" alt="Screenshot_20260228_164220"/></td>
+    <td><img src="https://github.com/user-attachments/assets/5a24e295-5688-4059-a855-6fd97cf9057f" width="300" alt="Screenshot_20260228_164256"/></td>
+    <td><img src="https://github.com/user-attachments/assets/1f741b77-1e8d-472a-ac78-7aa92a26bd0b" width="300" alt="Screenshot_20260228_164702"/></td>
+  </tr>
+</table>
 
-Kevin Roditi <kev.roditi@gmail.com>
-14:59 (23 minutes ago)
-to me
+
 
 # Pokédex – Enterprise-Grade Android Architecture Documentation
 Clean Architecture | Jetpack Compose | Kotlin | Coroutines | Flow | Hilt | Room | Paging3 | Material 3
@@ -1615,3 +1620,4 @@ sino criterio arquitectónico y visión a largo plazo.
 Representa un estándar profesional de desarrollo Android moderno.
 
 ---
+
