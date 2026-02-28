@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.dagger.hilt.android)
 }
 
 android {
@@ -73,9 +73,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
 
     // Hilt DI
-    implementation(libs.hilt.android)
-    ksp("com.google.dagger:hilt-compiler:2.51.1")
-    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation(libs.dagger.hilt.android)
+    ksp(libs.dagger.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     // Retrofit / OkHttp / Moshi
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
@@ -103,6 +103,9 @@ dependencies {
 
     // Biometric
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
+    // Palette
+    implementation("androidx.palette:palette-ktx:1.1.1")
 
     // Unit Testing
     testImplementation("org.mockito:mockito-core:5.14.2")

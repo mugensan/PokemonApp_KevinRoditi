@@ -44,8 +44,6 @@ fun PokemonCard(
                 },
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
-
-
             )
         }
     }
