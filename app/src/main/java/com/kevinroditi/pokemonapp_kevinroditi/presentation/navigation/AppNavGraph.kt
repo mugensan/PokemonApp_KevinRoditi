@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.kevinroditi.pokemonapp_kevinroditi.presentation.detail.DetailScreen
+import com.kevinroditi.pokemonapp_kevinroditi.presentation.favorites.FavoriteScreen
 import com.kevinroditi.pokemonapp_kevinroditi.presentation.home.HomeScreen
 
 /**
@@ -23,6 +24,21 @@ fun AppNavGraph(
         // HomeScreen
         composable(Screen.Home.route) {
             HomeScreen(
+                onPokemonClick = { name ->
+                    navController.navigate(Screen.Detail.createRoute(name))
+                },
+                onFavoritesClick = {
+                    navController.navigate(Screen.Favorites.route)
+                }
+            )
+        }
+
+        // FavoritesScreen
+        composable(Screen.Favorites.route) {
+            FavoriteScreen(
+                onBackClick = {
+                    navController.popBackStack()
+                },
                 onPokemonClick = { name ->
                     navController.navigate(Screen.Detail.createRoute(name))
                 }

@@ -3,9 +3,9 @@ package com.kevinroditi.pokemonapp_kevinroditi.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "favorite_pokemon")
-data class FavoritePokemonEntity(
+@Entity(tableName = "remote_keys")
+data class RemoteKeyEntity(
     @PrimaryKey val id: Int,
-    val name: String,
-    val imageUrl: String
+    val prevKey: Int?,
+    val nextKey: Int?
 )

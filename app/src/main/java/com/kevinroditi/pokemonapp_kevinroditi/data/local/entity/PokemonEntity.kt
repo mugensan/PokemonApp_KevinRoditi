@@ -3,9 +3,10 @@ package com.kevinroditi.pokemonapp_kevinroditi.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "favorite_pokemon")
-data class FavoritePokemonEntity(
+@Entity(tableName = "pokemon")
+data class PokemonEntity(
     @PrimaryKey val id: Int,
     val name: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val page: Int
 )

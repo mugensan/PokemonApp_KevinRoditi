@@ -13,4 +13,12 @@ interface PokemonRepository {
     fun getPokemonPaging(): Flow<PagingData<Pokemon>>
 
     suspend fun getPokemonDetail(name: String): Resource<PokemonDetail>
+
+    fun getFavorites(): Flow<List<Pokemon>>
+
+    fun isFavorite(name: String): Flow<Boolean>
+
+    suspend fun addFavorite(pokemon: Pokemon)
+
+    suspend fun removeFavorite(name: String)
 }

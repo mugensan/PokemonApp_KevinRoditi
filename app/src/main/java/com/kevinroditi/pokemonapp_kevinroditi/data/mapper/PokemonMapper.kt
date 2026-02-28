@@ -1,6 +1,8 @@
 package com.kevinroditi.pokemonapp_kevinroditi.data.mapper
 
 import com.kevinroditi.pokemonapp_kevinroditi.core.extensions.capitalizeFirstLetter
+import com.kevinroditi.pokemonapp_kevinroditi.data.local.entity.FavoritePokemonEntity
+import com.kevinroditi.pokemonapp_kevinroditi.data.local.entity.PokemonEntity
 import com.kevinroditi.pokemonapp_kevinroditi.data.remote.dto.NamedApiResourceDto
 import com.kevinroditi.pokemonapp_kevinroditi.data.remote.dto.PokemonDetailDto
 import com.kevinroditi.pokemonapp_kevinroditi.domain.model.Pokemon
@@ -8,13 +10,11 @@ import com.kevinroditi.pokemonapp_kevinroditi.domain.model.PokemonDetail
 import com.kevinroditi.pokemonapp_kevinroditi.domain.model.Stat
 
 /**
- * Mapper responsable for converting DTOs into Domain models
+ * Mapper responsable for converting DTOs and Entities into Domain models
  */
-
 object PokemonMapper {
     private const val IMAGE_BASE_URL =
-        "https://raw.githubusercontent.com/PokeAPI/sprites" +
-                "/master/sprites/pokemon/other/official-artwork"
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork"
 
     fun mapToPokemon(dto: NamedApiResourceDto): Pokemon {
         val id = extractIdFromUrl(dto.url)
@@ -22,6 +22,24 @@ object PokemonMapper {
             id = id,
             name = dto.name.capitalizeFirstLetter(),
             imageUrl = buildImageUrl(id)
+        )
+    }
+
+    fun mapToPokemon(entity: PokemonEntity): Pokemon {
+        return Pokemon(
+            id = entity.id,
+            name = entity.name.capitalizeFirstLetter(),
+            imageUrl = entity.imageUrl
+        )
+    }
+
+    fun mapToPokemon(entity: FavoritePokemonEntity): Pokemon {
+        // Since FavoritePokemonEntity only has name, we'd ideally store more or fetch more.
+        // For simplicity, let's assume we might want to update FavoritePokemonEntity to include ID and Image
+        return Pokemon(
+            id = 0, // Placeholder if not stored
+            name = entity.name.capitalizeFirstLetter(),
+            imageUrl = "" // Placeholder
         )
     }
 
@@ -54,9 +72,6 @@ object PokemonMapper {
         return "$IMAGE_BASE_URL/$id.png"
     }
 
-    /**
-     * Extracts Pokemon ID from API URL
-     */
     fun extractIdFromUrl(url: String): Int {
         return url.trimEnd('/').split("/").lastOrNull()?.toIntOrNull() ?: 0
     }
