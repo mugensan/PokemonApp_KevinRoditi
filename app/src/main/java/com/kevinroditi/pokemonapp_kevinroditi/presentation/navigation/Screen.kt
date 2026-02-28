@@ -15,6 +15,5 @@ sealed class Screen(val route: String) {
         fun createRoute(name: String): String {
             return "detail/$name"
         }
-
     }
 }
