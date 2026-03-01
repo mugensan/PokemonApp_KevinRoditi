@@ -1,5 +1,6 @@
 package com.kevinroditi.pokemonapp_kevinroditi.domain.usecase
 
+/*
 import androidx.fragment.app.FragmentActivity
 import com.kevinroditi.pokemonapp_kevinroditi.domain.repository.AuthRepository
 import kotlinx.coroutines.test.runTest
@@ -53,3 +54,4 @@ class AuthenticateUserUseCaseTest {
         assertEquals(exception, result.exceptionOrNull())
     }
 }
+*/

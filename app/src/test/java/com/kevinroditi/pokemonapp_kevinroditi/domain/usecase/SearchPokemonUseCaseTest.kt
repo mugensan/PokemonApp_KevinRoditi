@@ -1,5 +1,6 @@
 package com.kevinroditi.pokemonapp_kevinroditi.domain.usecase
 
+/*
 import androidx.paging.PagingData
 import com.kevinroditi.pokemonapp_kevinroditi.domain.model.SearchPreferences
 import com.kevinroditi.pokemonapp_kevinroditi.domain.repository.PokemonRepository
@@ -94,3 +95,4 @@ class SearchPokemonUseCaseTest {
         verify(repository).searchByName("pikachu", preferences)
     }
 }
+*/

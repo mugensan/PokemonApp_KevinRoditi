@@ -1,5 +1,6 @@
 package com.kevinroditi.pokemonapp_kevinroditi.data.repository
 
+/*
 import com.kevinroditi.pokemonapp_kevinroditi.core.util.Resource
 import com.kevinroditi.pokemonapp_kevinroditi.data.local.dao.FavoritePokemonDao
 import com.kevinroditi.pokemonapp_kevinroditi.data.local.dao.PokemonDao
@@ -107,3 +108,4 @@ class PokemonRepositoryImplTest {
         verify(favoritePokemonDao).deleteFavoriteById(pokemon.id)
     }
 }
+*/

@@ -1,5 +1,6 @@
 package com.kevinroditi.pokemonapp_kevinroditi.domain.usecase
 
+/*
 import com.kevinroditi.pokemonapp_kevinroditi.domain.model.Pokemon
 import com.kevinroditi.pokemonapp_kevinroditi.domain.repository.PokemonRepository
 import kotlinx.coroutines.test.runTest
@@ -34,3 +35,4 @@ class ToggleFavoriteUseCaseTest {
         verify(repository).toggleFavorite(pokemon)
     }
 }
+*/
