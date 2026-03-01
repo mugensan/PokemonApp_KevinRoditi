@@ -20,7 +20,7 @@ android {
         val apiKey = project.findProperty("POKE_API_KEY") as? String ?: ""
         buildConfigField("String", "POKE_API_KEY", "\"$apiKey\"")
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.kevinroditi.pokemonapp_kevinroditi.HiltTestRunner"
     }
 
     buildTypes {
@@ -43,41 +43,31 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/LICENSE*"
+            excludes += "META-INF/DEPENDENCIES"
+            excludes += "META-INF/INDEX.LIST"
         }
     }
     kotlinOptions {
         jvmTarget = "11"
     }
-}
-
-configurations.all {
-    resolutionStrategy {
-        force("org.jetbrains.kotlin:kotlin-reflect:2.0.21")
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 }
 
 dependencies {
-    constraints {
-        implementation("androidx.core:core:1.15.0")
-        implementation("androidx.core:core-ktx:1.15.0")
-    }
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    implementation("androidx.core:core-ktx:1.15.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+    implementation("androidx.activity:activity-compose:1.9.3")
+    implementation(platform("androidx.compose:compose-bom:2024.10.00"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material-icons-extended")
 
     // Kotlin Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
@@ -88,9 +78,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
 
     // Hilt DI
-    implementation(libs.dagger.hilt.android)
-    ksp(libs.dagger.hilt.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    ksp("com.google.dagger:hilt-compiler:2.51.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     // Retrofit / OkHttp / Moshi
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
@@ -117,19 +107,38 @@ dependencies {
     implementation("androidx.paging:paging-compose:3.3.5")
 
     // Biometric & Security
-    implementation(libs.androidx.biometric)
-    implementation(libs.androidx.security.crypto)
-    implementation(libs.androidx.datastore.preferences)
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     // Palette
-    implementation(libs.androidx.palette.ktx)
+    implementation("androidx.palette:palette-ktx:1.0.0")
 
     // Coil
-    implementation(libs.coil.compose)
+    implementation("io.coil-kt:coil-compose:2.7.0")
 
     // Unit Testing
+    testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:5.14.2")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
     testImplementation("org.robolectric:robolectric:4.14.1") 
     testImplementation("androidx.arch.core:core-testing:2.2.0")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
+    testImplementation("app.cash.turbine:turbine:1.1.0")
+    testImplementation("androidx.paging:paging-common:3.3.5")
+    testImplementation("androidx.paging:paging-testing:3.3.5")
+
+    // Instrumented Testing
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.10.00"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.51.1")
+    kspAndroidTest("com.google.dagger:hilt-android-compiler:2.51.1")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
+    androidTestImplementation("androidx.test:runner:1.6.2")
+    androidTestImplementation("androidx.test:rules:1.6.1")
+
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 }

@@ -16,11 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.FragmentActivity
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.kevinroditi.pokemonapp_kevinroditi.R
 
 @Composable
 fun LoginScreen(
@@ -80,14 +82,14 @@ fun LoginScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Text(
-                    text = "Welcome to Pokédex",
+                    text = stringResource(R.string.welcome_pokedex),
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
                 )
 
                 Text(
-                    text = "Unlock with your biometrics to continue",
+                    text = stringResource(R.string.unlock_biometrics),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
@@ -110,13 +112,13 @@ fun LoginScreen(
                     ) {
                         Icon(Icons.Default.Lock, contentDescription = null)
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = "Authenticate")
+                        Text(text = stringResource(R.string.authenticate))
                     }
                 }
 
                 AnimatedVisibility(visible = authState is AuthState.Failed) {
                     Text(
-                        text = "Authentication failed. Please try again.",
+                        text = stringResource(R.string.auth_failed),
                         color = MaterialTheme.colorScheme.error,
                         style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.padding(top = 16.dp)
@@ -125,7 +127,7 @@ fun LoginScreen(
 
                 AnimatedVisibility(visible = authState is AuthState.NotAvailable) {
                     Text(
-                        text = "Biometrics not available. Please check settings.",
+                        text = stringResource(R.string.biometrics_not_available),
                         color = MaterialTheme.colorScheme.error,
                         style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.padding(top = 16.dp)

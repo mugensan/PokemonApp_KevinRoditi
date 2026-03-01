@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.kevinroditi.pokemonapp_kevinroditi.R
 import com.kevinroditi.pokemonapp_kevinroditi.presentation.home.components.FilterBottomSheet
 import com.kevinroditi.pokemonapp_kevinroditi.presentation.home.components.PokemonGrid
 
@@ -112,7 +114,7 @@ fun HomeScreen(
                 onSearch = { /* Handled by debounce */ },
                 active = false,
                 onActiveChange = { },
-                placeholder = { Text("Search by name, ID or type") },
+                placeholder = { Text(stringResource(R.string.search_hint)) },
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
                 trailingIcon = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
