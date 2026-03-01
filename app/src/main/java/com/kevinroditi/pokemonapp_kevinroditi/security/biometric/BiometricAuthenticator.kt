@@ -17,14 +17,12 @@ sealed class BiometricResult {
 }
 
 interface BiometricAuthenticator {
-    suspend fun authenticate(): BiometricResult
+    suspend fun authenticate(activity: FragmentActivity): BiometricResult
 }
 
-class BiometricAuthenticatorImpl @Inject constructor(
-    private val activity: FragmentActivity
-) : BiometricAuthenticator {
+class BiometricAuthenticatorImpl @Inject constructor() : BiometricAuthenticator {
 
-    override suspend fun authenticate(): BiometricResult = suspendCancellableCoroutine { continuation ->
+    override suspend fun authenticate(activity: FragmentActivity): BiometricResult = suspendCancellableCoroutine { continuation ->
         val biometricManager = BiometricManager.from(activity)
         val authenticators = BIOMETRIC_STRONG or DEVICE_CREDENTIAL
 

@@ -9,18 +9,31 @@ import androidx.navigation.navArgument
 import com.kevinroditi.pokemonapp_kevinroditi.presentation.detail.DetailScreen
 import com.kevinroditi.pokemonapp_kevinroditi.presentation.favorites.FavoriteScreen
 import com.kevinroditi.pokemonapp_kevinroditi.presentation.home.HomeScreen
+import com.kevinroditi.pokemonapp_kevinroditi.security.presentation.LoginScreen
 
 /**
  * Central nav.
  */
 @Composable
 fun AppNavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    startDestination: String = Screen.Login.route
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route
+        startDestination = startDestination
     ) {
+        // LoginScreen
+        composable(Screen.Login.route) {
+            LoginScreen(
+                onAuthenticated = {
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Login.route) { inclusive = true }
+                    }
+                }
+            )
+        }
+
         // HomeScreen
         composable(Screen.Home.route) {
             HomeScreen(
