@@ -7,7 +7,6 @@ import androidx.paging.cachedIn
 import com.kevinroditi.pokemonapp_kevinroditi.domain.model.Pokemon
 import com.kevinroditi.pokemonapp_kevinroditi.domain.model.SearchPreferences
 import com.kevinroditi.pokemonapp_kevinroditi.domain.usecase.SearchPokemonUseCase
-import com.kevinroditi.pokemonapp_kevinroditi.domain.usecase.ToggleFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -19,14 +18,12 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val searchPokemonUseCase: SearchPokemonUseCase,
-    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
+    private val searchPokemonUseCase: SearchPokemonUseCase
 ) : ViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
@@ -54,11 +51,5 @@ class HomeViewModel @Inject constructor(
 
     fun updatePreferences(newPrefs: SearchPreferences) {
         _preferences.value = newPrefs
-    }
-
-    fun toggleFavorite(pokemon: Pokemon) {
-        viewModelScope.launch {
-            toggleFavoriteUseCase(pokemon)
-        }
     }
 }

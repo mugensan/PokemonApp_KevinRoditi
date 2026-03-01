@@ -10,7 +10,7 @@ import com.kevinroditi.pokemonapp_kevinroditi.domain.model.PokemonDetail
 import com.kevinroditi.pokemonapp_kevinroditi.domain.model.Stat
 
 /**
- * Mapper responsable for converting DTOs and Entities into Domain models
+ * Mapper responsible for converting DTOs and Entities into Domain models
  */
 object PokemonMapper {
     private const val IMAGE_BASE_URL =
@@ -25,21 +25,21 @@ object PokemonMapper {
         )
     }
 
-    fun mapToPokemon(entity: PokemonEntity): Pokemon {
+    fun mapPokemonEntityToDomain(entity: PokemonEntity, isFavorite: Boolean = false): Pokemon {
         return Pokemon(
             id = entity.id,
             name = entity.name.capitalizeFirstLetter(),
-            imageUrl = entity.imageUrl
+            imageUrl = entity.imageUrl,
+            isFavorite = isFavorite
         )
     }
 
-    fun mapToPokemon(entity: FavoritePokemonEntity): Pokemon {
-        // Since FavoritePokemonEntity only has name, we'd ideally store more or fetch more.
-        // For simplicity, let's assume we might want to update FavoritePokemonEntity to include ID and Image
+    fun mapFavoriteEntityToDomain(entity: FavoritePokemonEntity): Pokemon {
         return Pokemon(
-            id = 0, // Placeholder if not stored
+            id = entity.id,
             name = entity.name.capitalizeFirstLetter(),
-            imageUrl = "" // Placeholder
+            imageUrl = entity.imageUrl,
+            isFavorite = true
         )
     }
 

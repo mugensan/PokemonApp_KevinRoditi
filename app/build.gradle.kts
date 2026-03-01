@@ -116,8 +116,10 @@ dependencies {
     implementation("androidx.paging:paging-runtime-ktx:3.3.5")
     implementation("androidx.paging:paging-compose:3.3.5")
 
-    // Biometric
-    implementation("androidx.biometric:biometric:1.2.0-alpha05")
+    // Biometric & Security
+    implementation(libs.androidx.biometric)
+    implementation(libs.androidx.security.crypto)
+    implementation(libs.androidx.datastore.preferences)
 
     // Palette
     implementation(libs.androidx.palette.ktx)

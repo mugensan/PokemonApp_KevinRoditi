@@ -36,12 +36,7 @@ class DetailViewModel @Inject constructor(
 
     fun toggleFavorite(pokemon: Pokemon) {
         viewModelScope.launch {
-            val isFav = repository.isFavorite(pokemon.name).stateIn(viewModelScope).value
-            if (isFav) {
-                repository.removeFavorite(pokemon.name)
-            } else {
-                repository.addFavorite(pokemon)
-            }
+            repository.toggleFavorite(pokemon)
         }
     }
 

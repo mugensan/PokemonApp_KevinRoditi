@@ -20,9 +20,6 @@ interface FavoritePokemonDao {
     @Query("SELECT EXISTS(SELECT 1 FROM favorite_pokemon WHERE name = :name)")
     fun isFavorite(name: String): Flow<Boolean>
 
-    @Query("SELECT EXISTS(SELECT 1 FROM favorite_pokemon WHERE id = :id)")
-    fun isFavoriteById(id: Int): Flow<Boolean>
-
     @Query("SELECT EXISTS(SELECT 1 FROM favorite_pokemon WHERE name = :name)")
     suspend fun isFavoriteSync(name: String): Boolean
 
@@ -32,16 +29,6 @@ interface FavoritePokemonDao {
     @Query("DELETE FROM favorite_pokemon WHERE name = :name")
     suspend fun deleteFavorite(name: String)
 
-    @Query("DELETE FROM favorite_pokemon WHERE id = :id")
-    suspend fun deleteFavoriteById(id: Int)
-
-    @Query("""
-        SELECT id, name, imageUrl, -1 as page, 1 as isFavorite 
-        FROM favorite_pokemon 
-        ORDER BY id ASC
-    """)
-    fun pagingSource(): PagingSource<Int, PokemonWithFavorite>
-
-    @Query("SELECT * FROM favorite_pokemon WHERE id = :id")
-    fun observeFavoriteById(id: Int): Flow<FavoritePokemonEntity?>
+    @Query("SELECT * FROM favorite_pokemon ORDER BY id ASC")
+    fun pagingSource(): PagingSource<Int, FavoritePokemonEntity>
 }

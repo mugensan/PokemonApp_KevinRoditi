@@ -5,6 +5,7 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
+import com.kevinroditi.pokemonapp_kevinroditi.data.local.dao.PokemonWithFavorite
 import com.kevinroditi.pokemonapp_kevinroditi.data.local.db.AppDatabase
 import com.kevinroditi.pokemonapp_kevinroditi.data.local.entity.PokemonEntity
 import com.kevinroditi.pokemonapp_kevinroditi.data.local.entity.RemoteKeyEntity
@@ -17,11 +18,11 @@ import java.io.IOException
 class PokemonRemoteMediator(
     private val api: PokeApiService,
     private val database: AppDatabase
-) : RemoteMediator<Int, PokemonEntity>() {
+) : RemoteMediator<Int, PokemonWithFavorite>() {
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, PokemonEntity>
+        state: PagingState<Int, PokemonWithFavorite>
     ): MediatorResult {
         val offset = when (loadType) {
             LoadType.REFRESH -> {
@@ -77,14 +78,14 @@ class PokemonRemoteMediator(
         }
     }
 
-    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, PokemonEntity>): RemoteKeyEntity? {
+    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, PokemonWithFavorite>): RemoteKeyEntity? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { pokemon ->
                 database.remoteKeyDao().remoteKeysId(pokemon.id)
             }
     }
 
-    private suspend fun getRemoteKeyClosestToPosition(state: PagingState<Int, PokemonEntity>): RemoteKeyEntity? {
+    private suspend fun getRemoteKeyClosestToPosition(state: PagingState<Int, PokemonWithFavorite>): RemoteKeyEntity? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { id ->
                 database.remoteKeyDao().remoteKeysId(id)

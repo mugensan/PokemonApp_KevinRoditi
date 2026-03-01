@@ -2,6 +2,7 @@ package com.kevinroditi.pokemonapp_kevinroditi.domain.usecase
 
 import androidx.paging.PagingData
 import com.kevinroditi.pokemonapp_kevinroditi.domain.model.Pokemon
+import com.kevinroditi.pokemonapp_kevinroditi.domain.model.SearchPreferences
 import com.kevinroditi.pokemonapp_kevinroditi.domain.repository.PokemonRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -12,7 +13,7 @@ import javax.inject.Inject
 class GetPokemonPagingUseCase @Inject constructor(
     private val repository: PokemonRepository
 ) {
-    operator fun invoke(): Flow<PagingData<Pokemon>> {
-        return repository.getPokemonPaging()
+    operator fun invoke(preferences: SearchPreferences = SearchPreferences()): Flow<PagingData<Pokemon>> {
+        return repository.getPokemonPaging(preferences)
     }
 }
