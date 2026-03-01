@@ -1,11 +1,19 @@
-<<<<<<< HEAD
-<table>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/bb2684c9-1f90-4c4c-b912-7aac0de15663" width="300" alt="Screenshot_20260228_164220"/></td>
-    <td><img src="https://github.com/user-attachments/assets/5a24e295-5688-4059-a855-6fd97cf9057f" width="300" alt="Screenshot_20260228_164256"/></td>
-    <td><img src="https://github.com/user-attachments/assets/1f741b77-1e8d-472a-ac78-7aa92a26bd0b" width="300" alt="Screenshot_20260228_164702"/></td>
-  </tr>
-</table>
+<!-- Row 1 -->
+<img src="![1000023214](https://github.com/user-attachments/assets/17dba6a3-92dc-404f-9598-5cb20558b1a8)
+" width="32%" />
+<img src="![1000023217](https://github.com/user-attachments/assets/3c5ca8f2-7533-45cc-a77a-b3557c834175)
+" width="32%" />
+<img src="![1000023214](https://github.com/user-attachments/assets/8df3597e-f357-4277-9bed-a4076362a5d4)
+" width="32%" />
+<!-- Row 2 -->
+<img src="![1000023215](https://github.com/user-attachments/assets/f8e7a9c5-0197-4ace-8c21-b342812d080f)
+" width="32%" />
+<img src="![1000023219](https://github.com/user-attachments/assets/484c287d-115c-40a8-acdf-284345914f45)
+" width="32%" />
+<img src="![1000023220](https://github.com/user-attachments/assets/f552e8d3-81d0-4015-a9dc-7b0de098ed81)
+" width="32%" />
+
+
 
 
 
@@ -1328,3 +1336,4 @@ Representa un estándar profesional de desarrollo Android moderno.
 =======
 Este proyecto demuestra no solo capacidad de implementación técnica, sino madurez arquitectónica, aplicando los patrones más avanzados del ecosistema Android actual.
 >>>>>>> 85f182e (Search and Favorites added)
+
