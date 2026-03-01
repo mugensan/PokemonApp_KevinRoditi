@@ -1,0 +1,1558 @@
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    alias(libs.plugins.android.application)\r\n    alias(libs.plugins.kotlin.compose)\r\n    alias(libs.plugins.ksp)\r\n    alias(libs.plugins.dagger.hilt.android)\r\n    alias(libs.plugins.kotlin.android)\r\n}\r\n\r\nandroid {\r\n    namespace = \"com.kevinroditi.pokemonapp_kevinroditi\"\r\n    compileSdk = 35\r\n\r\n    defaultConfig {\r\n        applicationId = \"com.kevinroditi.pokemonapp_kevinroditi\"\r\n        minSdk = 24\r\n        targetSdk = 35\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n\r\n        val apiKey = project.findProperty(\"POKE_API_KEY\") as? String ?: \"\"\r\n        buildConfigField(\"String\", \"POKE_API_KEY\", \"\\\"$apiKey\\\"\")\r\n\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            isMinifyEnabled = false\r\n            proguardFiles(\r\n                getDefaultProguardFile(\"proguard-android-optimize.txt\"),\r\n                \"proguard-rules.pro\"\r\n            )\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_11\r\n        targetCompatibility = JavaVersion.VERSION_11\r\n    }\r\n    buildFeatures {\r\n        compose = true\r\n        buildConfig = true\r\n    }\r\n    packaging {\r\n        resources {\r\n            excludes += \"/META-INF/{AL2.0,LGPL2.1}\"\r\n        }\r\n    }\r\n    kotlinOptions {\r\n        jvmTarget = \"11\"\r\n    }\r\n}\r\n\r\nconfigurations.all {\r\n    resolutionStrategy {\r\n        force(\"org.jetbrains.kotlin:kotlin-reflect:2.0.21\")\r\n    }\r\n}\r\n\r\ndependencies {\r\n    constraints {\r\n        implementation(\"androidx.core:core:1.15.0\")\r\n        implementation(\"androidx.core:core-ktx:1.15.0\")\r\n    }\r\n\r\n    implementation(libs.androidx.core.ktx)\r\n    implementation(libs.androidx.lifecycle.runtime.ktx)\r\n    implementation(libs.androidx.activity.compose)\r\n    implementation(platform(libs.androidx.compose.bom))\r\n    implementation(libs.androidx.compose.ui)\r\n    implementation(libs.androidx.compose.ui.graphics)\r\n    implementation(libs.androidx.compose.ui.tooling.preview)\r\n    implementation(libs.androidx.compose.material3)\r\n\r\n    testImplementation(libs.junit)\r\n    androidTestImplementation(libs.androidx.junit)\r\n    androidTestImplementation(libs.androidx.espresso.core)\r\n    androidTestImplementation(platform(libs.androidx.compose.bom))\r\n    androidTestImplementation(libs.androidx.compose.ui.test.junit4)\r\n    debugImplementation(libs.androidx.compose.ui.tooling)\r\n    debugImplementation(libs.androidx.compose.ui.test.manifest)\r\n\r\n    // Kotlin Coroutines\r\n    implementation(\"org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0\")\r\n    implementation(\"org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0\")\r\n\r\n    // Lifecycle / ViewModel\r\n    implementation(\"androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7\")\r\n    implementation(\"androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7\")\r\n\r\n    // Hilt DI\r\n    implementation(libs.dagger.hilt.android)\r\n    ksp(libs.dagger.hilt.compiler)\r\n    implementation(libs.androidx.hilt.navigation.compose)\r\n\r\n    // Retrofit / OkHttp / Moshi\r\n    implementation(\"com.squareup.retrofit2:retrofit:2.11.0\")\r\n    implementation(\"com.squareup.retrofit2:converter-moshi:2.11.0\")\r\n    implementation(\"com.squareup.moshi:moshi-kotlin:1.15.0\")\r\n    implementation(\"com.squareup.okhttp3:okhttp:4.12.0\")\r\n    implementation(\"com.squareup.okhttp3:logging-interceptor:4.12.0\")\r\n\r\n    // Timber logging\r\n    implementation(\"com.jakewharton.timber:timber:5.0.1\")\r\n\r\n    // Room\r\n    val roomVersion = \"2.6.1\"\r\n    implementation(\"androidx.room:room-runtime:$roomVersion\")\r\n    ksp(\"androidx.room:room-compiler:$roomVersion\")\r\n    implementation(\"androidx.room:room-ktx:$roomVersion\")\r\n    implementation(\"androidx.room:room-paging:$roomVersion\")\r\n\r\n    // Navigation compose\r\n    implementation(\"androidx.navigation:navigation-compose:2.8.5\")\r\n\r\n    // Paging 3\r\n    implementation(\"androidx.paging:paging-runtime-ktx:3.3.5\")\r\n    implementation(\"androidx.paging:paging-compose:3.3.5\")\r\n\r\n    // Biometric & Security\r\n    implementation(libs.androidx.biometric)\r\n    implementation(libs.androidx.security.crypto)\r\n    implementation(libs.androidx.datastore.preferences)\r\n\r\n    // Palette\r\n    implementation(libs.androidx.palette.ktx)\r\n\r\n    // Coil\r\n    implementation(libs.coil.compose)\r\n\r\n    // Unit Testing\r\n    testImplementation(\"org.mockito:mockito-core:5.14.2\")\r\n    testImplementation(\"org.robolectric:robolectric:4.14.1\") \r\n    testImplementation(\"androidx.arch.core:core-testing:2.2.0\")\r\n    testImplementation(\"org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0\")\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	(revision 38a0a00ad724ebdd30e35f7110fcfcd6c20a3299)
++++ b/app/build.gradle.kts	(date 1772390009004)
+@@ -20,7 +20,7 @@
+         val apiKey = project.findProperty("POKE_API_KEY") as? String ?: ""
+         buildConfigField("String", "POKE_API_KEY", "\"$apiKey\"")
+ 
+-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
++        testInstrumentationRunner = "com.kevinroditi.pokemonapp_kevinroditi.HiltTestRunner"
+     }
+ 
+     buildTypes {
+@@ -43,41 +43,31 @@
+     packaging {
+         resources {
+             excludes += "/META-INF/{AL2.0,LGPL2.1}"
++            excludes += "META-INF/LICENSE*"
++            excludes += "META-INF/DEPENDENCIES"
++            excludes += "META-INF/INDEX.LIST"
+         }
+     }
+     kotlinOptions {
+         jvmTarget = "11"
+     }
+-}
+-
+-configurations.all {
+-    resolutionStrategy {
+-        force("org.jetbrains.kotlin:kotlin-reflect:2.0.21")
++    testOptions {
++        unitTests {
++            isIncludeAndroidResources = true
++        }
+     }
+ }
+ 
+ dependencies {
+-    constraints {
+-        implementation("androidx.core:core:1.15.0")
+-        implementation("androidx.core:core-ktx:1.15.0")
+-    }
+-
+-    implementation(libs.androidx.core.ktx)
+-    implementation(libs.androidx.lifecycle.runtime.ktx)
+-    implementation(libs.androidx.activity.compose)
+-    implementation(platform(libs.androidx.compose.bom))
+-    implementation(libs.androidx.compose.ui)
+-    implementation(libs.androidx.compose.ui.graphics)
+-    implementation(libs.androidx.compose.ui.tooling.preview)
+-    implementation(libs.androidx.compose.material3)
+-
+-    testImplementation(libs.junit)
+-    androidTestImplementation(libs.androidx.junit)
+-    androidTestImplementation(libs.androidx.espresso.core)
+-    androidTestImplementation(platform(libs.androidx.compose.bom))
+-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+-    debugImplementation(libs.androidx.compose.ui.tooling)
+-    debugImplementation(libs.androidx.compose.ui.test.manifest)
++    implementation("androidx.core:core-ktx:1.15.0")
++    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
++    implementation("androidx.activity:activity-compose:1.9.3")
++    implementation(platform("androidx.compose:compose-bom:2024.10.00"))
++    implementation("androidx.compose.ui:ui")
++    implementation("androidx.compose.ui:ui-graphics")
++    implementation("androidx.compose.ui:ui-tooling-preview")
++    implementation("androidx.compose.material3:material3")
++    implementation("androidx.compose.material:material-icons-extended")
+ 
+     // Kotlin Coroutines
+     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+@@ -88,9 +78,9 @@
+     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+ 
+     // Hilt DI
+-    implementation(libs.dagger.hilt.android)
+-    ksp(libs.dagger.hilt.compiler)
+-    implementation(libs.androidx.hilt.navigation.compose)
++    implementation("com.google.dagger:hilt-android:2.51.1")
++    ksp("com.google.dagger:hilt-compiler:2.51.1")
++    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+ 
+     // Retrofit / OkHttp / Moshi
+     implementation("com.squareup.retrofit2:retrofit:2.11.0")
+@@ -117,19 +107,38 @@
+     implementation("androidx.paging:paging-compose:3.3.5")
+ 
+     // Biometric & Security
+-    implementation(libs.androidx.biometric)
+-    implementation(libs.androidx.security.crypto)
+-    implementation(libs.androidx.datastore.preferences)
++    implementation("androidx.biometric:biometric:1.2.0-alpha05")
++    implementation("androidx.security:security-crypto:1.1.0-alpha06")
++    implementation("androidx.datastore:datastore-preferences:1.0.0")
+ 
+     // Palette
+-    implementation(libs.androidx.palette.ktx)
++    implementation("androidx.palette:palette-ktx:1.0.0")
+ 
+     // Coil
+-    implementation(libs.coil.compose)
++    implementation("io.coil-kt:coil-compose:2.7.0")
+ 
+     // Unit Testing
++    testImplementation("junit:junit:4.13.2")
+     testImplementation("org.mockito:mockito-core:5.14.2")
++    testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
+     testImplementation("org.robolectric:robolectric:4.14.1") 
+     testImplementation("androidx.arch.core:core-testing:2.2.0")
+     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
++    testImplementation("app.cash.turbine:turbine:1.1.0")
++    testImplementation("androidx.paging:paging-common:3.3.5")
++    testImplementation("androidx.paging:paging-testing:3.3.5")
++
++    // Instrumented Testing
++    androidTestImplementation("androidx.test.ext:junit:1.2.1")
++    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
++    androidTestImplementation(platform("androidx.compose:compose-bom:2024.10.00"))
++    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
++    androidTestImplementation("com.google.dagger:hilt-android-testing:2.51.1")
++    kspAndroidTest("com.google.dagger:hilt-android-compiler:2.51.1")
++    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
++    androidTestImplementation("androidx.test:runner:1.6.2")
++    androidTestImplementation("androidx.test:rules:1.6.1")
++
++    debugImplementation("androidx.compose.ui:ui-tooling")
++    debugImplementation("androidx.compose.ui:ui-test-manifest")
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/kevinroditi/pokemonapp_kevinroditi/security/presentation/LoginScreen.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.kevinroditi.pokemonapp_kevinroditi.security.presentation\r\n\r\nimport androidx.compose.animation.AnimatedVisibility\r\nimport androidx.compose.foundation.background\r\nimport androidx.compose.foundation.layout.*\r\nimport androidx.compose.foundation.shape.CircleShape\r\nimport androidx.compose.material.icons.Icons\r\nimport androidx.compose.material.icons.filled.Lock\r\nimport androidx.compose.material3.*\r\nimport androidx.compose.runtime.Composable\r\nimport androidx.compose.runtime.LaunchedEffect\r\nimport androidx.compose.runtime.collectAsState\r\nimport androidx.compose.runtime.getValue\r\nimport androidx.compose.ui.Alignment\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.draw.clip\r\nimport androidx.compose.ui.graphics.Brush\r\nimport androidx.compose.ui.platform.LocalContext\r\nimport androidx.compose.ui.text.font.FontWeight\r\nimport androidx.compose.ui.text.style.TextAlign\r\nimport androidx.compose.ui.unit.dp\r\nimport androidx.fragment.app.FragmentActivity\r\nimport androidx.hilt.navigation.compose.hiltViewModel\r\n\r\n@Composable\r\nfun LoginScreen(\r\n    onAuthenticated: () -> Unit,\r\n    viewModel: AuthViewModel = hiltViewModel()\r\n) {\r\n    val authState by viewModel.authState.collectAsState()\r\n    val context = LocalContext.current\r\n\r\n    LaunchedEffect(authState) {\r\n        if (authState is AuthState.Authenticated) {\r\n            onAuthenticated()\r\n        }\r\n    }\r\n\r\n    Box(\r\n        modifier = Modifier\r\n            .fillMaxSize()\r\n            .background(\r\n                Brush.verticalGradient(\r\n                    colors = listOf(\r\n                        MaterialTheme.colorScheme.primary,\r\n                        MaterialTheme.colorScheme.primaryContainer\r\n                    )\r\n                )\r\n            ),\r\n        contentAlignment = Alignment.Center\r\n    ) {\r\n        Card(\r\n            modifier = Modifier\r\n                .padding(32.dp)\r\n                .fillMaxWidth(),\r\n            shape = MaterialTheme.shapes.extraLarge,\r\n            elevation = CardDefaults.cardElevation(16.dp)\r\n        ) {\r\n            Column(\r\n                modifier = Modifier\r\n                    .padding(32.dp),\r\n                horizontalAlignment = Alignment.CenterHorizontally,\r\n                verticalArrangement = Arrangement.Center\r\n            ) {\r\n                Box(\r\n                    modifier = Modifier\r\n                        .size(100.dp)\r\n                        .clip(CircleShape)\r\n                        .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),\r\n                    contentAlignment = Alignment.Center\r\n                ) {\r\n                    Icon(\r\n                        imageVector = Icons.Default.Lock,\r\n                        contentDescription = null,\r\n                        modifier = Modifier.size(64.dp),\r\n                        tint = MaterialTheme.colorScheme.primary\r\n                    )\r\n                }\r\n\r\n                Spacer(modifier = Modifier.height(24.dp))\r\n\r\n                Text(\r\n                    text = \"Welcome to Pokédex\",\r\n                    style = MaterialTheme.typography.headlineSmall,\r\n                    fontWeight = FontWeight.Bold,\r\n                    textAlign = TextAlign.Center\r\n                )\r\n\r\n                Text(\r\n                    text = \"Unlock with your biometrics to continue\",\r\n                    style = MaterialTheme.typography.bodyMedium,\r\n                    color = MaterialTheme.colorScheme.onSurfaceVariant,\r\n                    textAlign = TextAlign.Center\r\n                )\r\n\r\n                Spacer(modifier = Modifier.height(32.dp))\r\n\r\n                if (authState is AuthState.Loading) {\r\n                    CircularProgressIndicator()\r\n                } else {\r\n                    Button(\r\n                        onClick = {\r\n                            val activity = context as? FragmentActivity\r\n                            if (activity != null) {\r\n                                viewModel.authenticate(activity)\r\n                            }\r\n                        },\r\n                        modifier = Modifier.fillMaxWidth(),\r\n                        shape = MaterialTheme.shapes.medium\r\n                    ) {\r\n                        Icon(Icons.Default.Lock, contentDescription = null)\r\n                        Spacer(modifier = Modifier.width(8.dp))\r\n                        Text(text = \"Authenticate\")\r\n                    }\r\n                }\r\n\r\n                AnimatedVisibility(visible = authState is AuthState.Failed) {\r\n                    Text(\r\n                        text = \"Authentication failed. Please try again.\",\r\n                        color = MaterialTheme.colorScheme.error,\r\n                        style = MaterialTheme.typography.bodySmall,\r\n                        modifier = Modifier.padding(top = 16.dp)\r\n                    )\r\n                }\r\n\r\n                AnimatedVisibility(visible = authState is AuthState.NotAvailable) {\r\n                    Text(\r\n                        text = \"Biometrics not available. Please check settings.\",\r\n                        color = MaterialTheme.colorScheme.error,\r\n                        style = MaterialTheme.typography.bodySmall,\r\n                        modifier = Modifier.padding(top = 16.dp)\r\n                    )\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/kevinroditi/pokemonapp_kevinroditi/security/presentation/LoginScreen.kt b/app/src/main/java/com/kevinroditi/pokemonapp_kevinroditi/security/presentation/LoginScreen.kt
+--- a/app/src/main/java/com/kevinroditi/pokemonapp_kevinroditi/security/presentation/LoginScreen.kt	(revision 38a0a00ad724ebdd30e35f7110fcfcd6c20a3299)
++++ b/app/src/main/java/com/kevinroditi/pokemonapp_kevinroditi/security/presentation/LoginScreen.kt	(date 1772390891190)
+@@ -16,11 +16,13 @@
+ import androidx.compose.ui.draw.clip
+ import androidx.compose.ui.graphics.Brush
+ import androidx.compose.ui.platform.LocalContext
++import androidx.compose.ui.res.stringResource
+ import androidx.compose.ui.text.font.FontWeight
+ import androidx.compose.ui.text.style.TextAlign
+ import androidx.compose.ui.unit.dp
+ import androidx.fragment.app.FragmentActivity
+ import androidx.hilt.navigation.compose.hiltViewModel
++import com.kevinroditi.pokemonapp_kevinroditi.R
+ 
+ @Composable
+ fun LoginScreen(
+@@ -80,14 +82,14 @@
+                 Spacer(modifier = Modifier.height(24.dp))
+ 
+                 Text(
+-                    text = "Welcome to Pokédex",
++                    text = stringResource(R.string.welcome_pokedex),
+                     style = MaterialTheme.typography.headlineSmall,
+                     fontWeight = FontWeight.Bold,
+                     textAlign = TextAlign.Center
+                 )
+ 
+                 Text(
+-                    text = "Unlock with your biometrics to continue",
++                    text = stringResource(R.string.unlock_biometrics),
+                     style = MaterialTheme.typography.bodyMedium,
+                     color = MaterialTheme.colorScheme.onSurfaceVariant,
+                     textAlign = TextAlign.Center
+@@ -110,13 +112,13 @@
+                     ) {
+                         Icon(Icons.Default.Lock, contentDescription = null)
+                         Spacer(modifier = Modifier.width(8.dp))
+-                        Text(text = "Authenticate")
++                        Text(text = stringResource(R.string.authenticate))
+                     }
+                 }
+ 
+                 AnimatedVisibility(visible = authState is AuthState.Failed) {
+                     Text(
+-                        text = "Authentication failed. Please try again.",
++                        text = stringResource(R.string.auth_failed),
+                         color = MaterialTheme.colorScheme.error,
+                         style = MaterialTheme.typography.bodySmall,
+                         modifier = Modifier.padding(top = 16.dp)
+@@ -125,7 +127,7 @@
+ 
+                 AnimatedVisibility(visible = authState is AuthState.NotAvailable) {
+                     Text(
+-                        text = "Biometrics not available. Please check settings.",
++                        text = stringResource(R.string.biometrics_not_available),
+                         color = MaterialTheme.colorScheme.error,
+                         style = MaterialTheme.typography.bodySmall,
+                         modifier = Modifier.padding(top = 16.dp)
+Index: app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/SearchPokemonUseCaseTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/SearchPokemonUseCaseTest.kt b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/SearchPokemonUseCaseTest.kt
+new file mode 100644
+--- /dev/null	(date 1772389275237)
++++ b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/SearchPokemonUseCaseTest.kt	(date 1772389275237)
+@@ -0,0 +1,96 @@
++package com.kevinroditi.pokemonapp_kevinroditi.domain.usecase
++
++import androidx.paging.PagingData
++import com.kevinroditi.pokemonapp_kevinroditi.domain.model.SearchPreferences
++import com.kevinroditi.pokemonapp_kevinroditi.domain.repository.PokemonRepository
++import kotlinx.coroutines.flow.flowOf
++import org.junit.Before
++import org.junit.Test
++import org.mockito.Mock
++import org.mockito.Mockito.`when`
++import org.mockito.Mockito.verify
++import org.mockito.MockitoAnnotations
++
++class SearchPokemonUseCaseTest {
++
++    @Mock
++    private lateinit var repository: PokemonRepository
++
++    private lateinit var useCase: SearchPokemonUseCase
++
++    @Before
++    fun setUp() {
++        MockitoAnnotations.openMocks(this)
++        useCase = SearchPokemonUseCase(repository)
++    }
++
++    @Test
++    fun `given blank query, when invoke, then call getPokemonPaging`() {
++        // Given
++        val query = ""
++        val preferences = SearchPreferences()
++        `when`(repository.getPokemonPaging(preferences)).thenReturn(flowOf(PagingData.empty()))
++
++        // When
++        useCase(query, preferences)
++
++        // Then
++        verify(repository).getPokemonPaging(preferences)
++    }
++
++    @Test
++    fun `given numeric query, when invoke, then call searchById`() {
++        // Given
++        val query = "25"
++        val preferences = SearchPreferences()
++        `when`(repository.searchById(25, preferences)).thenReturn(flowOf(PagingData.empty()))
++
++        // When
++        useCase(query, preferences)
++
++        // Then
++        verify(repository).searchById(25, preferences)
++    }
++
++    @Test
++    fun `given valid type query, when invoke, then call searchByType`() {
++        // Given
++        val query = "fire"
++        val preferences = SearchPreferences()
++        `when`(repository.searchByType("fire", preferences)).thenReturn(flowOf(PagingData.empty()))
++
++        // When
++        useCase(query, preferences)
++
++        // Then
++        verify(repository).searchByType("fire", preferences)
++    }
++
++    @Test
++    fun `given invalid type query, when invoke, then call searchByName`() {
++        // Given
++        val query = "notatype"
++        val preferences = SearchPreferences()
++        `when`(repository.searchByName("notatype", preferences)).thenReturn(flowOf(PagingData.empty()))
++
++        // When
++        useCase(query, preferences)
++
++        // Then
++        verify(repository).searchByName("notatype", preferences)
++    }
++
++    @Test
++    fun `given mixed case query, when invoke, then call searchByName with lowercase`() {
++        // Given
++        val query = "PikaChu"
++        val preferences = SearchPreferences()
++        `when`(repository.searchByName("pikachu", preferences)).thenReturn(flowOf(PagingData.empty()))
++
++        // When
++        useCase(query, preferences)
++
++        // Then
++        verify(repository).searchByName("pikachu", preferences)
++    }
++}
+Index: app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/FavoritesScreenTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/FavoritesScreenTest.kt b/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/FavoritesScreenTest.kt
+new file mode 100644
+--- /dev/null	(date 1772392498987)
++++ b/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/FavoritesScreenTest.kt	(date 1772392498987)
+@@ -0,0 +1,45 @@
++package com.kevinroditi.pokemonapp_kevinroditi.home
++
++import androidx.compose.ui.test.*
++import androidx.compose.ui.test.junit4.createAndroidComposeRule
++import com.kevinroditi.pokemonapp_kevinroditi.MainActivity
++import com.kevinroditi.pokemonapp_kevinroditi.R
++import dagger.hilt.android.testing.HiltAndroidRule
++import dagger.hilt.android.testing.HiltAndroidTest
++import org.junit.Before
++import org.junit.Rule
++import org.junit.Test
++
++@HiltAndroidTest
++class FavoritesScreenTest {
++
++    @get:Rule(order = 0)
++    val hiltRule = HiltAndroidRule(this)
++
++    @get:Rule(order = 1)
++    val composeTestRule = createAndroidComposeRule<MainActivity>()
++
++    @Before
++    fun setUp() {
++        hiltRule.inject()
++    }
++
++    @Test
++    fun favoritesScreen_clickFavoritesIcon_navigatesToFavorites() {
++        // Navigate to Favorites from Home
++        composeTestRule.onNodeWithContentDescription("Favorites").performClick()
++        
++        // Check if we are on Favorites Screen using the string resource for "Favorites"
++        val favoritesTitle = composeTestRule.activity.getString(R.string.favorites)
++        composeTestRule.onNodeWithText(favoritesTitle).assertIsDisplayed()
++    }
++
++    @Test
++    fun favoritesScreen_emptyState_showsNoFavoritesMessage() {
++        // Navigate to Favorites
++        composeTestRule.onNodeWithContentDescription("Favorites").performClick()
++        
++        // Check for empty state message
++        composeTestRule.onNodeWithText("No favorites yet").assertIsDisplayed()
++    }
++}
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">pokemonapp_kevinroditi</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	(revision 38a0a00ad724ebdd30e35f7110fcfcd6c20a3299)
++++ b/app/src/main/res/values/strings.xml	(date 1772390790992)
+@@ -1,3 +1,10 @@
+ <resources>
+     <string name="app_name">pokemonapp_kevinroditi</string>
+-</resources>
+\ No newline at end of file
++    <string name="search_hint">Buscar por nombre, ID o tipo (ej. fuego, agua, planta)</string>
++    <string name="welcome_pokedex">Welcome to Pokédex</string>
++    <string name="authenticate">Authenticate</string>
++    <string name="unlock_biometrics">Unlock with your biometrics to continue</string>
++    <string name="auth_failed">Authentication failed. Please try again.</string>
++    <string name="biometrics_not_available">Biometrics not available. Please check settings.</string>
++    <string name="favorites">Favorites</string>
++</resources>
+Index: app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/CheckSessionUseCaseTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/CheckSessionUseCaseTest.kt b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/CheckSessionUseCaseTest.kt
+new file mode 100644
+--- /dev/null	(date 1772389066425)
++++ b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/CheckSessionUseCaseTest.kt	(date 1772389066425)
+@@ -0,0 +1,49 @@
++package com.kevinroditi.pokemonapp_kevinroditi.domain.usecase
++
++import com.kevinroditi.pokemonapp_kevinroditi.domain.repository.AuthRepository
++import kotlinx.coroutines.test.runTest
++import org.junit.Assert.assertFalse
++import org.junit.Assert.assertTrue
++import org.junit.Before
++import org.junit.Test
++import org.mockito.Mock
++import org.mockito.Mockito.`when`
++import org.mockito.MockitoAnnotations
++
++class CheckSessionUseCaseTest {
++
++    @Mock
++    private lateinit var repository: AuthRepository
++
++    private lateinit var useCase: CheckSessionUseCase
++
++    @Before
++    fun setUp() {
++        MockitoAnnotations.openMocks(this)
++        useCase = CheckSessionUseCase(repository)
++    }
++
++    @Test
++    fun `given user is logged in, when invoke, then return true`() = runTest {
++        // Given
++        `when`(repository.isUserLoggedIn()).thenReturn(true)
++
++        // When
++        val result = useCase()
++
++        // Then
++        assertTrue(result)
++    }
++
++    @Test
++    fun `given user is not logged in, when invoke, then return false`() = runTest {
++        // Given
++        `when`(repository.isUserLoggedIn()).thenReturn(false)
++
++        // When
++        val result = useCase()
++
++        // Then
++        assertFalse(result)
++    }
++}
+Index: app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/ToggleFavoriteUseCaseTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/ToggleFavoriteUseCaseTest.kt b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/ToggleFavoriteUseCaseTest.kt
+new file mode 100644
+--- /dev/null	(date 1772390712256)
++++ b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/ToggleFavoriteUseCaseTest.kt	(date 1772390712256)
+@@ -0,0 +1,36 @@
++package com.kevinroditi.pokemonapp_kevinroditi.domain.usecase
++
++import com.kevinroditi.pokemonapp_kevinroditi.domain.model.Pokemon
++import com.kevinroditi.pokemonapp_kevinroditi.domain.repository.PokemonRepository
++import kotlinx.coroutines.test.runTest
++import org.junit.Before
++import org.junit.Test
++import org.mockito.Mock
++import org.mockito.Mockito.verify
++import org.mockito.MockitoAnnotations
++
++class ToggleFavoriteUseCaseTest {
++
++    @Mock
++    private lateinit var repository: PokemonRepository
++
++    private lateinit var useCase: ToggleFavoriteUseCase
++
++    @Before
++    fun setUp() {
++        MockitoAnnotations.openMocks(this)
++        useCase = ToggleFavoriteUseCase(repository)
++    }
++
++    @Test
++    fun `when invoke, then repository toggleFavorite is called`() = runTest {
++        // Given
++        val pokemon = Pokemon(1, "bulbasaur", "url", false)
++
++        // When
++        useCase(pokemon)
++
++        // Then
++        verify(repository).toggleFavorite(pokemon)
++    }
++}
+Index: app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/data/mapper/PokemonMapperTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/data/mapper/PokemonMapperTest.kt b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/data/mapper/PokemonMapperTest.kt
+new file mode 100644
+--- /dev/null	(date 1772391219440)
++++ b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/data/mapper/PokemonMapperTest.kt	(date 1772391219440)
+@@ -0,0 +1,60 @@
++package com.kevinroditi.pokemonapp_kevinroditi.data.mapper
++
++import com.kevinroditi.pokemonapp_kevinroditi.data.remote.dto.NamedApiResourceDto
++import com.kevinroditi.pokemonapp_kevinroditi.data.remote.dto.PokemonDetailDto
++import com.kevinroditi.pokemonapp_kevinroditi.data.remote.dto.SpriteResponse
++import org.junit.Assert.assertEquals
++import org.junit.Test
++
++class PokemonMapperTest {
++
++    @Test
++    fun `given named api resource, when mapToPokemon, then return correct pokemon model`() {
++        // Given
++        val dto = NamedApiResourceDto(name = "pikachu", url = "https://pokeapi.co/api/v2/pokemon/25/")
++
++        // When
++        val result = PokemonMapper.mapToPokemon(dto)
++
++        // Then
++        assertEquals(25, result.id)
++        assertEquals("Pikachu", result.name)
++        assertEquals("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png", result.imageUrl)
++    }
++
++    @Test
++    fun `given pokemon detail dto, when mapToPokemonDetail, then return correct detail model`() {
++        // Given
++        val dto = PokemonDetailDto(
++            id = 25,
++            name = "pikachu",
++            height = 4,
++            weight = 60,
++            sprites = SpriteResponse(null),
++            types = emptyList(),
++            stats = emptyList(),
++            abilities = emptyList()
++        )
++
++        // When
++        val result = PokemonMapper.mapToPokemonDetail(dto)
++
++        // Then
++        assertEquals(25, result.id)
++        assertEquals("Pikachu", result.name)
++        assertEquals(4, result.height)
++        assertEquals(60, result.weight)
++    }
++
++    @Test
++    fun `given url with id, when extractIdFromUrl, then return correct id`() {
++        // Given
++        val url = "https://pokeapi.co/api/v2/pokemon/1/"
++
++        // When
++        val result = PokemonMapper.extractIdFromUrl(url)
++
++        // Then
++        assertEquals(1, result)
++    }
++}
+Index: gradle/libs.versions.toml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[versions]\r\nagp = \"8.13.2\"\r\ncoreKtx = \"1.15.0\"\r\njunit = \"4.13.2\"\r\njunitVersion = \"1.2.1\"\r\nespressoCore = \"3.6.1\"\r\nlifecycleRuntimeKtx = \"2.8.7\"\r\nactivityCompose = \"1.9.3\"\r\nkotlin = \"2.0.21\"\r\ncomposeBom = \"2024.10.00\"\r\nksp = \"2.0.21-1.0.28\"\r\nhilt = \"2.51.1\"\r\nhiltNavigation = \"1.2.0\"\r\npaletteKtx = \"1.0.0\"\r\ncoil = \"2.7.0\"\r\nbiometric = \"1.2.0-alpha05\"\r\nsecurityCrypto = \"1.1.0-alpha06\"\r\ndatastore = \"1.0.0\"\r\n\r\n[libraries]\r\nandroidx-core-ktx = { group = \"androidx.core\", name = \"core-ktx\", version.ref = \"coreKtx\" }\r\njunit = { group = \"junit\", name = \"junit\", version.ref = \"junit\" }\r\nandroidx-junit = { group = \"androidx.test.ext\", name = \"junit\", version.ref = \"junitVersion\" }\r\nandroidx-espresso-core = { group = \"androidx.test.espresso\", name = \"espresso-core\", version.ref = \"espressoCore\" }\r\nandroidx-lifecycle-runtime-ktx = { group = \"androidx.lifecycle\", name = \"lifecycle-runtime-ktx\", version.ref = \"lifecycleRuntimeKtx\" }\r\nandroidx-activity-compose = { group = \"androidx.activity\", name = \"activity-compose\", version.ref = \"activityCompose\" }\r\nandroidx-compose-bom = { group = \"androidx.compose\", name = \"compose-bom\", version.ref = \"composeBom\" }\r\nandroidx-compose-ui = { group = \"androidx.compose.ui\", name = \"ui\" }\r\nandroidx-compose-ui-graphics = { group = \"androidx.compose.ui\", name = \"ui-graphics\" }\r\nandroidx-compose-ui-tooling = { group = \"androidx.compose.ui\", name = \"ui-tooling\" }\r\nandroidx-compose-ui-tooling-preview = { group = \"androidx.compose.ui\", name = \"ui-tooling-preview\" }\r\nandroidx-compose-ui-test-manifest = { group = \"androidx.compose.ui\", name = \"ui-test-manifest\" }\r\nandroidx-compose-ui-test-junit4 = { group = \"androidx.compose.ui\", name = \"ui-test-junit4\" }\r\nandroidx-compose-material3 = { group = \"androidx.compose.material3\", name = \"material3\" }\r\ndagger-hilt-android = { group = \"com.google.dagger\", name = \"hilt-android\", version.ref = \"hilt\" }\r\ndagger-hilt-compiler = { group = \"com.google.dagger\", name = \"hilt-compiler\", version.ref = \"hilt\" }\r\nandroidx-hilt-navigation-compose = { group = \"androidx.hilt\", name = \"hilt-navigation-compose\", version.ref = \"hiltNavigation\" }\r\nandroidx-palette-ktx = { group = \"androidx.palette\", name = \"palette-ktx\", version.ref = \"paletteKtx\" }\r\ncoil-compose = { group = \"io.coil-kt\", name = \"coil-compose\", version.ref = \"coil\" }\r\nkotlin-reflect = { group = \"org.jetbrains.kotlin\", name = \"kotlin-reflect\", version.ref = \"kotlin\" }\r\nandroidx-biometric = { group = \"androidx.biometric\", name = \"biometric\", version.ref = \"biometric\" }\r\nandroidx-security-crypto = { group = \"androidx.security\", name = \"security-crypto\", version.ref = \"securityCrypto\" }\r\nandroidx-datastore-preferences = { group = \"androidx.datastore\", name = \"datastore-preferences\", version.ref = \"datastore\" }\r\n\r\n[plugins]\r\nandroid-application = { id = \"com.android.application\", version.ref = \"agp\" }\r\nkotlin-compose = { id = \"org.jetbrains.kotlin.plugin.compose\", version.ref = \"kotlin\" }\r\nksp = { id = \"com.google.devtools.ksp\", version.ref = \"ksp\" }\r\ndagger-hilt-android = { id = \"com.google.dagger.hilt.android\", version.ref = \"hilt\" }\r\nkotlin-android = { id = \"org.jetbrains.kotlin.android\", version.ref = \"kotlin\" }\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+--- a/gradle/libs.versions.toml	(revision 38a0a00ad724ebdd30e35f7110fcfcd6c20a3299)
++++ b/gradle/libs.versions.toml	(date 1772390046433)
+@@ -16,6 +16,15 @@
+ biometric = "1.2.0-alpha05"
+ securityCrypto = "1.1.0-alpha06"
+ datastore = "1.0.0"
++mockito = "5.14.2"
++mockitoKotlin = "5.4.0"
++robolectric = "4.14.1"
++turbine = "1.1.0"
++coroutines = "1.9.0"
++archCoreTesting = "2.2.0"
++paging = "3.3.5"
++testRunner = "1.6.2"
++testRules = "1.6.1"
+ 
+ [libraries]
+ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+@@ -42,6 +51,19 @@
+ androidx-security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "securityCrypto" }
+ androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+ 
++# Testing
++mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
++mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
++robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
++turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
++kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
++androidx-arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "archCoreTesting" }
++androidx-paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "paging" }
++androidx-paging-testing = { group = "androidx.paging", name = "paging-testing", version.ref = "paging" }
++hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
++androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "testRunner" }
++androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "testRules" }
++
+ [plugins]
+ android-application = { id = "com.android.application", version.ref = "agp" }
+ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+Index: app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/RecreationTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/RecreationTest.kt b/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/RecreationTest.kt
+new file mode 100644
+--- /dev/null	(date 1772391249246)
++++ b/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/RecreationTest.kt	(date 1772391249246)
+@@ -0,0 +1,55 @@
++package com.kevinroditi.pokemonapp_kevinroditi.home
++
++import androidx.compose.ui.test.*
++import androidx.compose.ui.test.junit4.createAndroidComposeRule
++import androidx.test.core.app.ActivityScenario
++import com.kevinroditi.pokemonapp_kevinroditi.MainActivity
++import com.kevinroditi.pokemonapp_kevinroditi.R
++import dagger.hilt.android.testing.HiltAndroidRule
++import dagger.hilt.android.testing.HiltAndroidTest
++import org.junit.Before
++import org.junit.Rule
++import org.junit.Test
++
++@HiltAndroidTest
++class RecreationTest {
++
++    @get:Rule(order = 0)
++    val hiltRule = HiltAndroidRule(this)
++
++    @get:Rule(order = 1)
++    val composeTestRule = createAndroidComposeRule<MainActivity>()
++
++    @Before
++    fun setUp() {
++        hiltRule.inject()
++    }
++
++    @Test
++    fun activityRecreation_preservesState() {
++        // Given - Type something in search bar
++        val hint = composeTestRule.activity.getString(R.string.search_hint)
++        composeTestRule.onNodeWithText(hint).performTextInput("Pikachu")
++        composeTestRule.onNodeWithText("Pikachu").assertIsDisplayed()
++
++        // When - Recreate activity
++        composeTestRule.activityRule.scenario.recreate()
++
++        // Then - Verify text is still there
++        composeTestRule.onNodeWithText("Pikachu").assertIsDisplayed()
++    }
++
++    @Test
++    fun configurationChange_rotation_preservesState() {
++        // Note: Simple recreation simulates config change in many aspects.
++        // Direct orientation change is better done with UI Automator or ActivityScenario.
++        
++        val hint = composeTestRule.activity.getString(R.string.search_hint)
++        composeTestRule.onNodeWithText(hint).performTextInput("Charizard")
++        
++        // Recreate to simulate config change
++        composeTestRule.activityRule.scenario.recreate()
++        
++        composeTestRule.onNodeWithText("Charizard").assertIsDisplayed()
++    }
++}
+Index: app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/data/repository/LocalAuthRepositoryTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/data/repository/LocalAuthRepositoryTest.kt b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/data/repository/LocalAuthRepositoryTest.kt
+new file mode 100644
+--- /dev/null	(date 1772389087545)
++++ b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/data/repository/LocalAuthRepositoryTest.kt	(date 1772389087545)
+@@ -0,0 +1,89 @@
++package com.kevinroditi.pokemonapp_kevinroditi.security.repository
++
++import androidx.fragment.app.FragmentActivity
++import com.kevinroditi.pokemonapp_kevinroditi.security.biometric.BiometricAuthenticator
++import com.kevinroditi.pokemonapp_kevinroditi.security.biometric.BiometricResult
++import com.kevinroditi.pokemonapp_kevinroditi.security.session.SessionManager
++import kotlinx.coroutines.test.runTest
++import org.junit.Assert.assertFalse
++import org.junit.Assert.assertTrue
++import org.junit.Before
++import org.junit.Test
++import org.junit.runner.RunWith
++import org.mockito.Mock
++import org.mockito.Mockito.`when`
++import org.mockito.Mockito.verify
++import org.mockito.MockitoAnnotations
++import org.mockito.kotlin.mock
++import org.robolectric.RobolectricTestRunner
++import org.robolectric.annotation.Config
++
++@RunWith(RobolectricTestRunner::class)
++@Config(manifest = Config.NONE)
++class LocalAuthRepositoryTest {
++
++    @Mock
++    private lateinit var authenticator: BiometricAuthenticator
++
++    @Mock
++    private lateinit var sessionManager: SessionManager
++
++    private lateinit var repository: LocalAuthRepository
++
++    @Before
++    fun setUp() {
++        MockitoAnnotations.openMocks(this)
++        repository = LocalAuthRepository(authenticator, sessionManager)
++    }
++
++    @Test
++    fun `given biometric success, when authenticate, then save session and return success`() = runTest {
++        // Given
++        val activity = mock<FragmentActivity>()
++        `when`(authenticator.authenticate(activity)).thenReturn(BiometricResult.Success)
++
++        // When
++        val result = repository.authenticate(activity)
++
++        // Then
++        assertTrue(result.isSuccess)
++        verify(sessionManager).saveSession(true)
++    }
++
++    @Test
++    fun `given biometric failure, when authenticate, then return failure`() = runTest {
++        // Given
++        val activity = mock<FragmentActivity>()
++        `when`(authenticator.authenticate(activity)).thenReturn(BiometricResult.Failed)
++
++        // When
++        val result = repository.authenticate(activity)
++
++        // Then
++        assertTrue(result.isFailure)
++        verify(sessionManager, org.mockito.Mockito.never()).saveSession(anyBoolean())
++    }
++
++    @Test
++    fun `given session is active, when isUserLoggedIn, then return true`() = runTest {
++        // Given
++        `when`(sessionManager.isLoggedIn()).thenReturn(true)
++
++        // When
++        val result = repository.isUserLoggedIn()
++
++        // Then
++        assertTrue(result)
++    }
++
++    @Test
++    fun `when logout, then clear session`() = runTest {
++        // When
++        repository.logout()
++
++        // Then
++        verify(sessionManager).clearSession()
++    }
++
++    private fun anyBoolean(): Boolean = org.mockito.ArgumentMatchers.anyBoolean()
++}
+Index: app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/auth/LoginScreenTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/auth/LoginScreenTest.kt b/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/auth/LoginScreenTest.kt
+new file mode 100644
+--- /dev/null	(date 1772390588617)
++++ b/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/auth/LoginScreenTest.kt	(date 1772390588617)
+@@ -0,0 +1,37 @@
++package com.kevinroditi.pokemonapp_kevinroditi.auth
++
++import androidx.compose.ui.test.*
++import androidx.compose.ui.test.junit4.createAndroidComposeRule
++import com.kevinroditi.pokemonapp_kevinroditi.MainActivity
++import dagger.hilt.android.testing.HiltAndroidRule
++import dagger.hilt.android.testing.HiltAndroidTest
++import org.junit.Before
++import org.junit.Rule
++import org.junit.Test
++
++@HiltAndroidTest
++class LoginScreenTest {
++
++    @get:Rule(order = 0)
++    val hiltRule = HiltAndroidRule(this)
++
++    @get:Rule(order = 1)
++    val composeTestRule = createAndroidComposeRule<MainActivity>()
++
++    @Before
++    fun setUp() {
++        hiltRule.inject()
++    }
++
++    @Test
++    fun loginScreen_initialState_showsWelcomeMessageAndAuthenticateButton() {
++        composeTestRule.onNodeWithText("Welcome to Pokédex").assertIsDisplayed()
++        composeTestRule.onNodeWithText("Authenticate").assertIsDisplayed()
++    }
++
++    @Test
++    fun loginScreen_clickAuthenticate_triggersAction() {
++        composeTestRule.onNodeWithText("Authenticate").assertHasClickAction()
++        composeTestRule.onNodeWithText("Authenticate").performClick()
++    }
++}
+Index: app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/HomeScreenTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/HomeScreenTest.kt b/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/HomeScreenTest.kt
+new file mode 100644
+--- /dev/null	(date 1772390618033)
++++ b/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/HomeScreenTest.kt	(date 1772390618033)
+@@ -0,0 +1,35 @@
++package com.kevinroditi.pokemonapp_kevinroditi.home
++
++import androidx.compose.ui.test.*
++import androidx.compose.ui.test.junit4.createAndroidComposeRule
++import com.kevinroditi.pokemonapp_kevinroditi.MainActivity
++import dagger.hilt.android.testing.HiltAndroidRule
++import dagger.hilt.android.testing.HiltAndroidTest
++import org.junit.Before
++import org.junit.Rule
++import org.junit.Test
++
++@HiltAndroidTest
++class HomeScreenTest {
++
++    @get:Rule(order = 0)
++    val hiltRule = HiltAndroidRule(this)
++
++    @get:Rule(order = 1)
++    val composeTestRule = createAndroidComposeRule<MainActivity>()
++
++    @Before
++    fun setUp() {
++        hiltRule.inject()
++    }
++
++    @Test
++    fun homeScreen_displaysDashingTitle() {
++        composeTestRule.onNodeWithText("Pokédex").assertIsDisplayed()
++    }
++
++    @Test
++    fun homeScreen_searchBar_hasCorrectPlaceholder() {
++        composeTestRule.onNodeWithText("Search by name, ID or type").assertIsDisplayed()
++    }
++}
+Index: app/src/main/java/com/kevinroditi/pokemonapp_kevinroditi/presentation/home/HomeScreen.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.kevinroditi.pokemonapp_kevinroditi.presentation.home\r\n\r\nimport android.content.Intent\r\nimport android.net.Uri\r\nimport androidx.compose.foundation.background\r\nimport androidx.compose.foundation.clickable\r\nimport androidx.compose.foundation.layout.*\r\nimport androidx.compose.material.icons.Icons\r\nimport androidx.compose.material.icons.automirrored.filled.List\r\nimport androidx.compose.material.icons.filled.Clear\r\nimport androidx.compose.material.icons.filled.Favorite\r\nimport androidx.compose.material.icons.filled.Search\r\nimport androidx.compose.material3.*\r\nimport androidx.compose.runtime.*\r\nimport androidx.compose.ui.Alignment\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.draw.shadow\r\nimport androidx.compose.ui.graphics.Brush\r\nimport androidx.compose.ui.graphics.Color\r\nimport androidx.compose.ui.platform.LocalContext\r\nimport androidx.compose.ui.text.SpanStyle\r\nimport androidx.compose.ui.text.buildAnnotatedString\r\nimport androidx.compose.ui.text.font.FontWeight\r\nimport androidx.compose.ui.text.style.TextAlign\r\nimport androidx.compose.ui.text.style.TextDecoration\r\nimport androidx.compose.ui.text.withStyle\r\nimport androidx.compose.ui.unit.dp\r\nimport androidx.compose.ui.unit.sp\r\nimport androidx.hilt.navigation.compose.hiltViewModel\r\nimport androidx.paging.compose.collectAsLazyPagingItems\r\nimport com.kevinroditi.pokemonapp_kevinroditi.presentation.home.components.FilterBottomSheet\r\nimport com.kevinroditi.pokemonapp_kevinroditi.presentation.home.components.PokemonGrid\r\n\r\n/**\r\n * HomeScreen displaying paginated Pokemon grid with Search and Filters\r\n */\r\n@OptIn(ExperimentalMaterial3Api::class)\r\n@Composable\r\nfun HomeScreen(\r\n    onPokemonClick: (String) -> Unit,\r\n    onFavoritesClick: () -> Unit,\r\n    viewModel: HomeViewModel = hiltViewModel()\r\n) {\r\n    val pokemonPagingItems = viewModel.pokemonPagingData.collectAsLazyPagingItems()\r\n    val searchQuery by viewModel.searchQuery.collectAsState()\r\n    val preferences by viewModel.preferences.collectAsState()\r\n    \r\n    var showFilterSheet by remember { mutableStateOf(false) }\r\n    val sheetState = rememberModalBottomSheetState()\r\n    val context = LocalContext.current\r\n\r\n    Scaffold(\r\n        modifier = Modifier.fillMaxSize(),\r\n        containerColor = Color.Transparent // Allow gradient background to show\r\n    ) { paddingValues ->\r\n        Column(\r\n            modifier = Modifier\r\n                .fillMaxSize()\r\n                .padding(paddingValues)\r\n                .background(\r\n                    Brush.verticalGradient(\r\n                        colors = listOf(\r\n                            MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f),\r\n                            MaterialTheme.colorScheme.background\r\n                        )\r\n                    )\r\n                )\r\n        ) {\r\n            // App Title and Author Info - Centered and Dashing\r\n            Column(\r\n                modifier = Modifier\r\n                    .fillMaxWidth()\r\n                    .padding(vertical = 32.dp),\r\n                horizontalAlignment = Alignment.CenterHorizontally\r\n            ) {\r\n                Text(\r\n                    text = \"Pokédex\",\r\n                    style = MaterialTheme.typography.displayLarge,\r\n                    fontWeight = FontWeight.Black,\r\n                    color = MaterialTheme.colorScheme.primary,\r\n                    modifier = Modifier.padding(bottom = 4.dp),\r\n                    textAlign = TextAlign.Center\r\n                )\r\n                \r\n                Surface(\r\n                    color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.7f),\r\n                    shape = MaterialTheme.shapes.small,\r\n                    modifier = Modifier\r\n                        .clickable {\r\n                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(\"https://www.linkedin.com/in/kevin-roditi-b2800b100?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app\"))\r\n                            context.startActivity(intent)\r\n                        }\r\n                ) {\r\n                    Text(\r\n                        text = buildAnnotatedString {\r\n                            append(\"Created by \")\r\n                            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, textDecoration = TextDecoration.Underline)) {\r\n                                append(\"Kevin Roditi\")\r\n                            }\r\n                        },\r\n                        style = MaterialTheme.typography.labelSmall,\r\n                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),\r\n                        color = MaterialTheme.colorScheme.onSecondaryContainer,\r\n                        textAlign = TextAlign.Center\r\n                    )\r\n                }\r\n            }\r\n\r\n            SearchBar(\r\n                query = searchQuery,\r\n                onQueryChange = viewModel::onSearchQueryChange,\r\n                onSearch = { /* Handled by debounce */ },\r\n                active = false,\r\n                onActiveChange = { },\r\n                placeholder = { Text(\"Search by name, ID or type\") },\r\n                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },\r\n                trailingIcon = {\r\n                    Row(verticalAlignment = Alignment.CenterVertically) {\r\n                        if (searchQuery.isNotEmpty()) {\r\n                            IconButton(onClick = { viewModel.onSearchQueryChange(\"\") }) {\r\n                                Icon(Icons.Default.Clear, contentDescription = \"Clear search\")\r\n                            }\r\n                        }\r\n                        IconButton(onClick = { showFilterSheet = true }) {\r\n                            Icon(imageVector = Icons.AutoMirrored.Filled.List, contentDescription = \"Filters\")\r\n                        }\r\n                        IconButton(onClick = onFavoritesClick) {\r\n                            Icon(Icons.Default.Favorite, contentDescription = \"Favorites\")\r\n                        }\r\n                    }\r\n                },\r\n                modifier = Modifier\r\n                    .fillMaxWidth()\r\n                    .padding(horizontal = 16.dp, vertical = 8.dp)\r\n                    .shadow(12.dp, MaterialTheme.shapes.extraLarge)\r\n            ) {\r\n            }\r\n\r\n            PokemonGrid(\r\n                pokemonPagingItems = pokemonPagingItems,\r\n                onPokemonClick = onPokemonClick,\r\n                onFavoriteClick = { pokemon -> viewModel.toggleFavorite(pokemon) },\r\n                modifier = Modifier.weight(1f)\r\n            )\r\n        }\r\n\r\n        if (showFilterSheet) {\r\n            ModalBottomSheet(\r\n                onDismissRequest = { showFilterSheet = false },\r\n                sheetState = sheetState,\r\n                containerColor = MaterialTheme.colorScheme.surface,\r\n                tonalElevation = 8.dp\r\n            ) {\r\n                FilterBottomSheet(\r\n                    preferences = preferences,\r\n                    onPreferencesChange = viewModel::updatePreferences,\r\n                    onDismiss = { showFilterSheet = false }\r\n                )\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/kevinroditi/pokemonapp_kevinroditi/presentation/home/HomeScreen.kt b/app/src/main/java/com/kevinroditi/pokemonapp_kevinroditi/presentation/home/HomeScreen.kt
+--- a/app/src/main/java/com/kevinroditi/pokemonapp_kevinroditi/presentation/home/HomeScreen.kt	(revision 38a0a00ad724ebdd30e35f7110fcfcd6c20a3299)
++++ b/app/src/main/java/com/kevinroditi/pokemonapp_kevinroditi/presentation/home/HomeScreen.kt	(date 1772391110929)
+@@ -18,6 +18,7 @@
+ import androidx.compose.ui.graphics.Brush
+ import androidx.compose.ui.graphics.Color
+ import androidx.compose.ui.platform.LocalContext
++import androidx.compose.ui.res.stringResource
+ import androidx.compose.ui.text.SpanStyle
+ import androidx.compose.ui.text.buildAnnotatedString
+ import androidx.compose.ui.text.font.FontWeight
+@@ -28,6 +29,7 @@
+ import androidx.compose.ui.unit.sp
+ import androidx.hilt.navigation.compose.hiltViewModel
+ import androidx.paging.compose.collectAsLazyPagingItems
++import com.kevinroditi.pokemonapp_kevinroditi.R
+ import com.kevinroditi.pokemonapp_kevinroditi.presentation.home.components.FilterBottomSheet
+ import com.kevinroditi.pokemonapp_kevinroditi.presentation.home.components.PokemonGrid
+ 
+@@ -112,7 +114,7 @@
+                 onSearch = { /* Handled by debounce */ },
+                 active = false,
+                 onActiveChange = { },
+-                placeholder = { Text("Search by name, ID or type") },
++                placeholder = { Text(stringResource(R.string.search_hint)) },
+                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                 trailingIcon = {
+                     Row(verticalAlignment = Alignment.CenterVertically) {
+Index: app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/AuthenticateUserUseCaseTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/AuthenticateUserUseCaseTest.kt b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/AuthenticateUserUseCaseTest.kt
+new file mode 100644
+--- /dev/null	(date 1772388964158)
++++ b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/domain/usecase/AuthenticateUserUseCaseTest.kt	(date 1772388964158)
+@@ -0,0 +1,55 @@
++package com.kevinroditi.pokemonapp_kevinroditi.domain.usecase
++
++import androidx.fragment.app.FragmentActivity
++import com.kevinroditi.pokemonapp_kevinroditi.domain.repository.AuthRepository
++import kotlinx.coroutines.test.runTest
++import org.junit.Assert.assertEquals
++import org.junit.Assert.assertTrue
++import org.junit.Before
++import org.junit.Test
++import org.mockito.Mock
++import org.mockito.Mockito.`when`
++import org.mockito.MockitoAnnotations
++import org.mockito.kotlin.mock
++
++class AuthenticateUserUseCaseTest {
++
++    @Mock
++    private lateinit var repository: AuthRepository
++
++    private lateinit var useCase: AuthenticateUserUseCase
++
++    @Before
++    fun setUp() {
++        MockitoAnnotations.openMocks(this)
++        useCase = AuthenticateUserUseCase(repository)
++    }
++
++    @Test
++    fun `given repository returns success, when invoke, then return success result`() = runTest {
++        // Given
++        val activity = mock<FragmentActivity>()
++        `when`(repository.authenticate(activity)).thenReturn(Result.success(Unit))
++
++        // When
++        val result = useCase(activity)
++
++        // Then
++        assertTrue(result.isSuccess)
++    }
++
++    @Test
++    fun `given repository returns failure, when invoke, then return failure result`() = runTest {
++        // Given
++        val activity = mock<FragmentActivity>()
++        val exception = Exception("Auth failed")
++        `when`(repository.authenticate(activity)).thenReturn(Result.failure(exception))
++
++        // When
++        val result = useCase(activity)
++
++        // Then
++        assertTrue(result.isFailure)
++        assertEquals(exception, result.exceptionOrNull())
++    }
++}
+Index: app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/SearchBarTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/SearchBarTest.kt b/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/SearchBarTest.kt
+new file mode 100644
+--- /dev/null	(date 1772391151408)
++++ b/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/home/SearchBarTest.kt	(date 1772391151408)
+@@ -0,0 +1,51 @@
++package com.kevinroditi.pokemonapp_kevinroditi.home
++
++import androidx.compose.ui.test.*
++import androidx.compose.ui.test.junit4.createAndroidComposeRule
++import com.kevinroditi.pokemonapp_kevinroditi.MainActivity
++import com.kevinroditi.pokemonapp_kevinroditi.R
++import dagger.hilt.android.testing.HiltAndroidRule
++import dagger.hilt.android.testing.HiltAndroidTest
++import org.junit.Before
++import org.junit.Rule
++import org.junit.Test
++
++@HiltAndroidTest
++class SearchBarTest {
++
++    @get:Rule(order = 0)
++    val hiltRule = HiltAndroidRule(this)
++
++    @get:Rule(order = 1)
++    val composeTestRule = createAndroidComposeRule<MainActivity>()
++
++    @Before
++    fun setUp() {
++        hiltRule.inject()
++    }
++
++    @Test
++    fun searchBar_typingUpdatesText() {
++        val hint = composeTestRule.activity.getString(R.string.search_hint)
++        composeTestRule.onNodeWithText(hint).performTextInput("Pikachu")
++        composeTestRule.onNodeWithText("Pikachu").assertIsDisplayed()
++    }
++
++    @Test
++    fun searchBar_clearButton_clearsInput() {
++        val hint = composeTestRule.activity.getString(R.string.search_hint)
++        composeTestRule.onNodeWithText(hint).performTextInput("Pikachu")
++        
++        // Find clear button (IconButton with description "Clear search")
++        composeTestRule.onNodeWithContentDescription("Clear search").performClick()
++        
++        composeTestRule.onNodeWithText("Pikachu").assertDoesNotExist()
++        composeTestRule.onNodeWithText(hint).assertIsDisplayed()
++    }
++
++    @Test
++    fun searchBar_spanishHint_isVisible() {
++        val expectedHint = "Buscar por nombre, ID o tipo (ej. fuego, agua, planta)"
++        composeTestRule.onNodeWithText(expectedHint).assertIsDisplayed()
++    }
++}
+Index: app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/security/session/SessionManagerTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/security/session/SessionManagerTest.kt b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/security/session/SessionManagerTest.kt
+new file mode 100644
+--- /dev/null	(date 1772390647320)
++++ b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/security/session/SessionManagerTest.kt	(date 1772390647320)
+@@ -0,0 +1,58 @@
++package com.kevinroditi.pokemonapp_kevinroditi.security.session
++
++import android.content.Context
++import androidx.test.core.app.ApplicationProvider
++import org.junit.Assert.assertFalse
++import org.junit.Assert.assertTrue
++import org.junit.Before
++import org.junit.Test
++import org.junit.runner.RunWith
++import org.robolectric.RobolectricTestRunner
++import org.robolectric.annotation.Config
++
++@RunWith(RobolectricTestRunner::class)
++@Config(manifest = Config.NONE)
++class SessionManagerTest {
++
++    private lateinit var sessionManager: SessionManager
++    private lateinit var context: Context
++
++    @Before
++    fun setUp() {
++        context = ApplicationProvider.getApplicationContext()
++        sessionManager = SessionManager(context)
++    }
++
++    @Test
++    fun `given session is saved as true, when isLoggedIn, then return true`() {
++        // When
++        sessionManager.saveSession(true)
++
++        // Then
++        assertTrue(sessionManager.isLoggedIn())
++    }
++
++    @Test
++    fun `given session is cleared, when isLoggedIn, then return false`() {
++        // Given
++        sessionManager.saveSession(true)
++
++        // When
++        sessionManager.clearSession()
++
++        // Then
++        assertFalse(sessionManager.isLoggedIn())
++    }
++
++    @Test
++    fun `given new session manager instance, when session was saved, then it persists`() {
++        // Given
++        sessionManager.saveSession(true)
++
++        // When
++        val newSessionManager = SessionManager(context)
++
++        // Then
++        assertTrue(newSessionManager.isLoggedIn())
++    }
++}
+Index: app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/security/presentation/AuthViewModelTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/security/presentation/AuthViewModelTest.kt b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/security/presentation/AuthViewModelTest.kt
+new file mode 100644
+--- /dev/null	(date 1772392589972)
++++ b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/security/presentation/AuthViewModelTest.kt	(date 1772392589972)
+@@ -0,0 +1,117 @@
++package com.kevinroditi.pokemonapp_kevinroditi.security.presentation
++
++import androidx.fragment.app.FragmentActivity
++import app.cash.turbine.test
++import com.kevinroditi.pokemonapp_kevinroditi.domain.usecase.AuthenticateUserUseCase
++import com.kevinroditi.pokemonapp_kevinroditi.domain.usecase.CheckSessionUseCase
++import com.kevinroditi.pokemonapp_kevinroditi.domain.usecase.LogoutUseCase
++import kotlinx.coroutines.Dispatchers
++import kotlinx.coroutines.ExperimentalCoroutinesApi
++import kotlinx.coroutines.test.StandardTestDispatcher
++import kotlinx.coroutines.test.resetMain
++import kotlinx.coroutines.test.runTest
++import kotlinx.coroutines.test.setMain
++import org.junit.After
++import org.junit.Assert.assertEquals
++import org.junit.Before
++import org.junit.Test
++import org.mockito.Mock
++import org.mockito.Mockito.`when`
++import org.mockito.Mockito.verify
++import org.mockito.MockitoAnnotations
++import org.mockito.kotlin.mock
++
++@OptIn(ExperimentalCoroutinesApi::class)
++class AuthViewModelTest {
++
++    @Mock
++    private lateinit var authenticateUserUseCase: AuthenticateUserUseCase
++
++    @Mock
++    private lateinit var checkSessionUseCase: CheckSessionUseCase
++
++    @Mock
++    private lateinit var logoutUseCase: LogoutUseCase
++
++    private val testDispatcher = StandardTestDispatcher()
++
++    @Before
++    fun setUp() {
++        MockitoAnnotations.openMocks(this)
++        Dispatchers.setMain(testDispatcher)
++    }
++
++    @After
++    fun tearDown() {
++        Dispatchers.resetMain()
++    }
++
++    @Test
++    fun `given user is logged in, when init, then state is Authenticated`() = runTest {
++        // Given
++        `when`(checkSessionUseCase()).thenReturn(true)
++
++        // When
++        val viewModel = AuthViewModel(authenticateUserUseCase, checkSessionUseCase, logoutUseCase)
++
++        // Then
++        viewModel.authState.test {
++            assertEquals(AuthState.Authenticated, awaitItem())
++        }
++    }
++
++    @Test
++    fun `given auth succeeds, when authenticate, then state becomes Authenticated`() = runTest {
++        // Given
++        val activity = mock<FragmentActivity>()
++        `when`(checkSessionUseCase()).thenReturn(false)
++        `when`(authenticateUserUseCase(activity)).thenReturn(Result.success(Unit))
++        val viewModel = AuthViewModel(authenticateUserUseCase, checkSessionUseCase, logoutUseCase)
++
++        // When
++        viewModel.authenticate(activity)
++
++        // Then
++        viewModel.authState.test {
++            assertEquals(AuthState.Idle, awaitItem())
++            assertEquals(AuthState.Loading, awaitItem())
++            assertEquals(AuthState.Authenticated, awaitItem())
++        }
++    }
++
++    @Test
++    fun `given auth fails, when authenticate, then state becomes Failed`() = runTest {
++        // Given
++        val activity = mock<FragmentActivity>()
++        `when`(checkSessionUseCase()).thenReturn(false)
++        `when`(authenticateUserUseCase(activity)).thenReturn(Result.failure(Exception("Failed")))
++        val viewModel = AuthViewModel(authenticateUserUseCase, checkSessionUseCase, logoutUseCase)
++
++        // When
++        viewModel.authenticate(activity)
++
++        // Then
++        viewModel.authState.test {
++            assertEquals(AuthState.Idle, awaitItem())
++            assertEquals(AuthState.Loading, awaitItem())
++            assertEquals(AuthState.Failed, awaitItem())
++        }
++    }
++
++    @Test
++    fun `when logout, then use case is called and state is Idle`() = runTest {
++        // Given
++        `when`(checkSessionUseCase()).thenReturn(true)
++        val viewModel = AuthViewModel(authenticateUserUseCase, checkSessionUseCase, logoutUseCase)
++
++        // When
++        viewModel.logout()
++
++        // Then
++        viewModel.authState.test {
++            assertEquals(AuthState.Authenticated, awaitItem())
++            assertEquals(AuthState.Idle, awaitItem())
++        }
++        verify(logoutUseCase).invoke()
++    }
++}
+Index: app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/security/repository/LocalAuthRepositoryTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/security/repository/LocalAuthRepositoryTest.kt b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/security/repository/LocalAuthRepositoryTest.kt
+new file mode 100644
+--- /dev/null	(date 1772389783974)
++++ b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/security/repository/LocalAuthRepositoryTest.kt	(date 1772389783974)
+@@ -0,0 +1,89 @@
++package com.kevinroditi.pokemonapp_kevinroditi.security.repository
++
++import androidx.fragment.app.FragmentActivity
++import com.kevinroditi.pokemonapp_kevinroditi.security.biometric.BiometricAuthenticator
++import com.kevinroditi.pokemonapp_kevinroditi.security.biometric.BiometricResult
++import com.kevinroditi.pokemonapp_kevinroditi.security.session.SessionManager
++import kotlinx.coroutines.test.runTest
++import org.junit.Assert.assertFalse
++import org.junit.Assert.assertTrue
++import org.junit.Before
++import org.junit.Test
++import org.junit.runner.RunWith
++import org.mockito.Mock
++import org.mockito.Mockito.`when`
++import org.mockito.Mockito.verify
++import org.mockito.MockitoAnnotations
++import org.mockito.kotlin.any
++import org.mockito.kotlin.mock
++import org.mockito.kotlin.never
++import org.robolectric.RobolectricTestRunner
++import org.robolectric.annotation.Config
++
++@RunWith(RobolectricTestRunner::class)
++@Config(manifest = Config.NONE)
++class LocalAuthRepositoryTest {
++
++    @Mock
++    private lateinit var authenticator: BiometricAuthenticator
++
++    @Mock
++    private lateinit var sessionManager: SessionManager
++
++    private lateinit var repository: LocalAuthRepository
++
++    @Before
++    fun setUp() {
++        MockitoAnnotations.openMocks(this)
++        repository = LocalAuthRepository(authenticator, sessionManager)
++    }
++
++    @Test
++    fun `given biometric success, when authenticate, then save session and return success`() = runTest {
++        // Given
++        val activity = mock<FragmentActivity>()
++        `when`(authenticator.authenticate(activity)).thenReturn(BiometricResult.Success)
++
++        // When
++        val result = repository.authenticate(activity)
++
++        // Then
++        assertTrue(result.isSuccess)
++        verify(sessionManager).saveSession(true)
++    }
++
++    @Test
++    fun `given biometric failure, when authenticate, then return failure and do not save session`() = runTest {
++        // Given
++        val activity = mock<FragmentActivity>()
++        `when`(authenticator.authenticate(activity)).thenReturn(BiometricResult.Failed)
++
++        // When
++        val result = repository.authenticate(activity)
++
++        // Then
++        assertTrue(result.isFailure)
++        verify(sessionManager, never()).saveSession(any())
++    }
++
++    @Test
++    fun `given session is active, when isUserLoggedIn, then return true`() = runTest {
++        // Given
++        `when`(sessionManager.isLoggedIn()).thenReturn(true)
++
++        // When
++        val result = repository.isUserLoggedIn()
++
++        // Then
++        assertTrue(result)
++    }
++
++    @Test
++    fun `when logout, then clear session`() = runTest {
++        // When
++        repository.logout()
++
++        // Then
++        verify(sessionManager).clearSession()
++    }
++}
+Index: app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/HiltTestRunner.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/HiltTestRunner.kt b/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/HiltTestRunner.kt
+new file mode 100644
+--- /dev/null	(date 1772392312840)
++++ b/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/HiltTestRunner.kt	(date 1772392312840)
+@@ -0,0 +1,12 @@
++package com.kevinroditi.pokemonapp_kevinroditi
++
++import android.app.Application
++import android.content.Context
++import androidx.test.runner.AndroidJUnitRunner
++import dagger.hilt.android.testing.HiltTestApplication
++
++class HiltTestRunner : AndroidJUnitRunner() {
++    override fun newApplication(cl: ClassLoader?, name: String?, context: Context?): Application {
++        return super.newApplication(cl, HiltTestApplication::class.java.name, context)
++    }
++}
+Index: app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/data/repository/PokemonRepositoryImplTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/data/repository/PokemonRepositoryImplTest.kt b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/data/repository/PokemonRepositoryImplTest.kt
+new file mode 100644
+--- /dev/null	(date 1772390669596)
++++ b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/data/repository/PokemonRepositoryImplTest.kt	(date 1772390669596)
+@@ -0,0 +1,109 @@
++package com.kevinroditi.pokemonapp_kevinroditi.data.repository
++
++import com.kevinroditi.pokemonapp_kevinroditi.core.util.Resource
++import com.kevinroditi.pokemonapp_kevinroditi.data.local.dao.FavoritePokemonDao
++import com.kevinroditi.pokemonapp_kevinroditi.data.local.dao.PokemonDao
++import com.kevinroditi.pokemonapp_kevinroditi.data.local.db.AppDatabase
++import com.kevinroditi.pokemonapp_kevinroditi.data.remote.api.PokeApiService
++import com.kevinroditi.pokemonapp_kevinroditi.data.remote.dto.PokemonDetailDto
++import com.kevinroditi.pokemonapp_kevinroditi.data.remote.dto.SpriteResponse
++import com.kevinroditi.pokemonapp_kevinroditi.domain.model.Pokemon
++import kotlinx.coroutines.test.runTest
++import org.junit.Assert.assertEquals
++import org.junit.Assert.assertTrue
++import org.junit.Before
++import org.junit.Test
++import org.mockito.Mock
++import org.mockito.Mockito.`when`
++import org.mockito.Mockito.verify
++import org.mockito.MockitoAnnotations
++import org.mockito.kotlin.any
++import java.io.IOException
++
++class PokemonRepositoryImplTest {
++
++    @Mock
++    private lateinit var api: PokeApiService
++
++    @Mock
++    private lateinit var database: AppDatabase
++
++    @Mock
++    private lateinit var pokemonDao: PokemonDao
++
++    @Mock
++    private lateinit var favoritePokemonDao: FavoritePokemonDao
++
++    private lateinit var repository: PokemonRepositoryImpl
++
++    @Before
++    fun setUp() {
++        MockitoAnnotations.openMocks(this)
++        `when`(database.pokemonDao()).thenReturn(pokemonDao)
++        `when`(database.favoritePokemonDao()).thenReturn(favoritePokemonDao)
++        repository = PokemonRepositoryImpl(api, database)
++    }
++
++    @Test
++    fun `given api returns detail, when getPokemonDetail, then return Success resource with mapped data`() = runTest {
++        // Given
++        val pokemonName = "pikachu"
++        val detailDto = PokemonDetailDto(
++            id = 25,
++            name = "pikachu",
++            height = 4,
++            weight = 60,
++            sprites = SpriteResponse(null),
++            types = emptyList(),
++            stats = emptyList(),
++            abilities = emptyList()
++        )
++        `when`(api.getPokemonDetail(pokemonName)).thenReturn(detailDto)
++
++        // When
++        val result = repository.getPokemonDetail(pokemonName)
++
++        // Then
++        assertTrue(result is Resource.Success)
++        assertEquals("pikachu", (result as Resource.Success).value.name)
++    }
++
++    @Test
++    fun `given api throws IOException, when getPokemonDetail, then return Error resource with network message`() = runTest {
++        // Given
++        val pokemonName = "pikachu"
++        `when`(api.getPokemonDetail(pokemonName)).thenAnswer { throw IOException() }
++
++        // When
++        val result = repository.getPokemonDetail(pokemonName)
++
++        // Then
++        assertTrue(result is Resource.Error)
++        assertTrue((result as Resource.Error).message.contains("Network error"))
++    }
++
++    @Test
++    fun `when addFavorite is called, then database insert is triggered`() = runTest {
++        // Given
++        val pokemon = Pokemon(1, "bulbasaur", "url", false)
++
++        // When
++        repository.addFavorite(pokemon)
++
++        // Then
++        verify(favoritePokemonDao).insertFavorite(any())
++    }
++
++    @Test
++    fun `when toggleFavorite called on existing favorite, then delete is triggered`() = runTest {
++        // Given
++        val pokemon = Pokemon(1, "bulbasaur", "url", true)
++        `when`(favoritePokemonDao.isFavoriteSync(pokemon.name)).thenReturn(true)
++
++        // When
++        repository.toggleFavorite(pokemon)
++
++        // Then
++        verify(favoritePokemonDao).deleteFavoriteById(pokemon.id)
++    }
++}
+Index: app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/presentation/home/HomeViewModelTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/presentation/home/HomeViewModelTest.kt b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/presentation/home/HomeViewModelTest.kt
+new file mode 100644
+--- /dev/null	(date 1772392677745)
++++ b/app/src/test/java/com/kevinroditi/pokemonapp_kevinroditi/presentation/home/HomeViewModelTest.kt	(date 1772392677745)
+@@ -0,0 +1,88 @@
++package com.kevinroditi.pokemonapp_kevinroditi.presentation.home
++
++import com.kevinroditi.pokemonapp_kevinroditi.domain.model.Pokemon
++import com.kevinroditi.pokemonapp_kevinroditi.domain.model.SearchPreferences
++import com.kevinroditi.pokemonapp_kevinroditi.domain.usecase.SearchPokemonUseCase
++import com.kevinroditi.pokemonapp_kevinroditi.domain.usecase.ToggleFavoriteUseCase
++import kotlinx.coroutines.Dispatchers
++import kotlinx.coroutines.ExperimentalCoroutinesApi
++import kotlinx.coroutines.flow.flowOf
++import kotlinx.coroutines.test.StandardTestDispatcher
++import kotlinx.coroutines.test.resetMain
++import kotlinx.coroutines.test.runTest
++import kotlinx.coroutines.test.setMain
++import org.junit.After
++import org.junit.Assert.assertEquals
++import org.junit.Before
++import org.junit.Test
++import org.mockito.Mock
++import org.mockito.Mockito.`when`
++import org.mockito.Mockito.verify
++import org.mockito.MockitoAnnotations
++import org.mockito.kotlin.any
++
++@OptIn(ExperimentalCoroutinesApi::class)
++class HomeViewModelTest {
++
++    @Mock
++    private lateinit var searchPokemonUseCase: SearchPokemonUseCase
++
++    @Mock
++    private lateinit var toggleFavoriteUseCase: ToggleFavoriteUseCase
++
++    private lateinit var viewModel: HomeViewModel
++    private val testDispatcher = StandardTestDispatcher()
++
++    @Before
++    fun setUp() {
++        MockitoAnnotations.openMocks(this)
++        Dispatchers.setMain(testDispatcher)
++        
++        // Default mock for init
++        `when`(searchPokemonUseCase(any(), any())).thenReturn(flowOf())
++        
++        viewModel = HomeViewModel(
++            searchPokemonUseCase,
++            toggleFavoriteUseCase
++        )
++    }
++
++    @After
++    fun tearDown() {
++        Dispatchers.resetMain()
++    }
++
++    @Test
++    fun `when search query changes, then state is updated`() = runTest {
++        // When
++        viewModel.onSearchQueryChange("pikachu")
++
++        // Then
++        assertEquals("pikachu", viewModel.searchQuery.value)
++    }
++
++    @Test
++    fun `when preferences updated, then state is updated`() = runTest {
++        // Given
++        val newPrefs = SearchPreferences(onlyFavorites = true)
++
++        // When
++        viewModel.updatePreferences(newPrefs)
++
++        // Then
++        assertEquals(newPrefs, viewModel.preferences.value)
++    }
++
++    @Test
++    fun `when favorite toggled, then use case is called`() = runTest {
++        // Given
++        val pokemon = Pokemon(1, "bulbasaur", "", false)
++
++        // When
++        viewModel.toggleFavorite(pokemon)
++
++        // Then
++        testDispatcher.scheduler.advanceUntilIdle()
++        verify(toggleFavoriteUseCase).invoke(pokemon)
++    }
++}
+diff --git a/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/di/TestAuthModule.kt b/app/src/androidTest/java/com/kevinroditi/pokemonapp_kevinroditi/di/TestAuthModule.kt
+new file mode 100644
