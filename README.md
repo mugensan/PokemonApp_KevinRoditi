@@ -1,12 +1,17 @@
 <table>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/bb2684c9-1f90-4c4c-b912-7aac0de15663" width="300" alt="Screenshot_20260228_164220"/></td>
-    <td><img src="https://github.com/user-attachments/assets/5a24e295-5688-4059-a855-6fd97cf9057f" width="300" alt="Screenshot_20260228_164256"/></td>
-    <td><img src="https://github.com/user-attachments/assets/1f741b77-1e8d-472a-ac78-7aa92a26bd0b" width="300" alt="Screenshot_20260228_164702"/></td>
+    <td><img src="https://github.com/user-attachments/assets/f1b81dfa-6481-4d12-9f8f-5acd4d32390b" width="100%"></td>
+    <td><img src="https://github.com/user-attachments/assets/8739b486-6a79-47d2-b22f-9915dcc42cc4" width="100%"></td>
+    <td><img src="https://github.com/user-attachments/assets/9ecc5460-dab2-41a1-9521-a9c8f50243d3" width="100%"></td>
+    
+    
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/353b684b-8383-4c7e-a5be-2126fff1d73b" width="100%"></td>
+    <td><img src="https://github.com/user-attachments/assets/38d048ee-2df9-4788-9827-045aaf97dc07" width="100%"></td>
+    <td><img src="https://github.com/user-attachments/assets/dff0851e-21f7-4f20-9018-9a5d40215ba4" width="100%"></td>
   </tr>
 </table>
-
-
 
 # Pokédex – Enterprise-Grade Android Architecture Documentation
 Clean Architecture | Jetpack Compose | Kotlin | Coroutines | Flow | Hilt | Room | Paging3 | Material 3
@@ -1620,3 +1625,4 @@ sino criterio arquitectónico y visión a largo plazo.
 Representa un estándar profesional de desarrollo Android moderno.
 
 ---
+
