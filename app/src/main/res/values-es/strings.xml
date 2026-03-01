@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">pokemonapp_kevinroditi</string>
+    <string name="search_hint">Buscar por nombre, ID o tipo (ej. fuego, agua, planta)</string>
+    <string name="welcome_pokedex">Bienvenido a Pokédex</string>
+    <string name="authenticate">Autenticar</string>
+    <string name="unlock_biometrics">Desbloquea con tus datos biométricos para continuar</string>
+    <string name="auth_failed">Error de autenticación. Inténtalo de nuevo.</string>
+    <string name="biometrics_not_available">Biometría no disponible. Comprueba los ajustes.</string>
+    <string name="favorites">Favoritos</string>
+</resources>
