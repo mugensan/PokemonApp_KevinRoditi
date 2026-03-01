@@ -37,1592 +37,491 @@ Minimum requirements:
 - Gradle 8+
 - JDK 17
 
+
+--- 
+# Pokemon App – Technical Documentation 
+**Branch:** `dev` 
+**Author:** Kevin Roditi 
+🇪🇸 [Versión en Español](#pokemon-app---documentacion-tecnica) 
 ---
 
-🇪🇸 [Ir a la versión en Español](#-instrucciones-importantes--configuración-español)
+# 1. Project Overview
 
----
+Pokémon App is a production-ready Android application built using **Kotlin**, **Jetpack Compose**, **Clean Architecture**, and **MVVM** principles.
 
-# 🇬🇧 Pokédex – Enterprise-Grade Android Architecture Documentation
+The project demonstrates senior-level Android engineering standards with a strong focus on:
 
----
+- Strict separation of concerns
+- Scalable and maintainable architecture
+- Biometric authentication
+- Advanced search capabilities
+- Persistent favorites system
+- Offline-first approach
+- Comprehensive unit and UI testing
+- Future-ready authentication abstraction (Firebase-ready, currently disabled)
 
-## 1. Project Overview
-
-This document describes the architectural structure, design decisions, scalability considerations, and production-readiness characteristics of the Pokédex Android application.
-
-The application is implemented using modern Android development standards, emphasizing:
-
-- Clean architectural layering
-- Reactive state management
-- Clear separation of concerns
-- Testability-oriented design
-- Scalability readiness
-- Long-term maintainability
-
----
-
-## 2. Architectural Principles
-
-The system is built upon the following principles:
-
-- Dependency inversion
-- Separation of responsibilities
-- Immutable state modeling
-- Reactive data streams
-- Single source of truth
-- Platform-independent domain logic
-- Explicit mapping between layers
-- Lifecycle awareness
-
-Architectural decisions prioritize extensibility and maintainability.
+The entire implementation resides under the `dev` branch.
 
 ---
 
-## 3. High-Level Architecture
+# 2. Architecture
 
-The application follows Clean Architecture:
+The project follows **Clean Architecture**, structured into three primary layers:## 2.1 Domain Layer
 
-Presentation Layer  
-↓  
-Domain Layer  
-↓  
-Data Layer  
-
-Dependencies flow inward. Outer layers depend only on inner abstractions.
-
----
-
-## 4. Layer Responsibilities
-
-### 4.1 Presentation Layer
-
-Responsibilities:
-
-- Rendering UI using Jetpack Compose
-- Observing state from ViewModels
-- Emitting user interactions
-- Managing navigation
-
-Characteristics:
-
-- Stateless composables
-- State hoisting
-- Immutable UI state models
-- Lifecycle-aware Flow collection
-- Strict separation between UI and logic
-
----
-
-### 4.2 Domain Layer
-
-Responsibilities:
-
-- Business logic orchestration
-- Definition of repository contracts
-- Use case abstraction
-- Pure domain modeling
-
-Characteristics:
-
-- Kotlin-only implementation
+- Pure Kotlin
 - No Android framework dependencies
-- Fully testable in isolation
-- Explicit use case classes per business operation
+- Fully testable
+- Contains:
+  - Domain models
+  - Repository interfaces
+  - Business UseCases
 
----
-
-### 4.3 Data Layer
-
-Responsibilities:
-
-- Remote API integration (Retrofit)
-- Local persistence (Room)
-- Paging data management (Paging3)
-- DTO-to-domain mapping
-- Repository implementation
-
-Characteristics:
-
-- Explicit mappers between layers
-- Flow-based data emission
-- Separation between network, database, and repository logic
-- Encapsulation of data source complexity
-
----
-
-## 5. Data Flow Model
-
-User Interaction  
-→ ViewModel  
-→ Use Case  
-→ Repository  
-→ Remote / Local Data Source  
-→ Domain Model Mapping  
-→ Flow Emission  
-→ UI Recomposition  
-
-Unidirectional data flow is enforced.
-
----
-
-## 6. State Management Strategy
-
-The state management approach includes:
-
-- Immutable UI state data classes
-- Single state holder per screen
-- Flow-based state exposure
-- Structured coroutine scope usage
-- Lifecycle-aware state collection
-
----
-
-## 7. Paging Strategy
-
-Paging3 is used to:
-
-- Prevent full dataset loading into memory
-- Enable incremental loading
-- Improve scroll performance
-- Maintain UI responsiveness
-
-LazyVerticalGrid ensures efficient rendering of paged content.
-
----
-
-## 8. Persistence Strategy
-
-Favorites are stored locally using Room.
-
-Design characteristics:
-
-- Dedicated Entity model
-- Flow-based DAO methods
-- Repository-level toggle logic
-- Reactive updates
-
-Database versioning support is included.
-
----
-
-## 9. Performance Considerations
-
-The implementation incorporates:
-
-- Lazy rendering
-- Incremental pagination
-- Controlled recomposition
-- Lifecycle-aware data collection
-
-Potential production optimizations include:
-
-- Baseline Profiles
-- Macrobenchmark testing
-- Startup tracing
-- Memory profiling
-
----
-
-## 10. Error Handling Strategy
-
-Current implementation supports reactive error propagation.
-
-Production enhancements may include:
-
-- Sealed result models
-- Structured UI error states
-- Retry policies
-- Connectivity monitoring
-- Exception mapping layer
-
----
-
-## 11. Security Considerations
-
-Architecture supports:
-
-- Dependency injection boundaries
-- No hardcoded credentials
-- Repository encapsulation
-
-Production improvements may include:
-
-- Certificate pinning
-- Encrypted local database
-- Secure key management
-- Obfuscation and R8 hardening
-
----
-
-## 12. Scalability Model
-
-The current architecture supports:
-
-- Feature-based modularization
-- RemoteMediator integration
-- Offline-first evolution
-- Background synchronization
-- Feature flag integration
-
-Scaling can occur without structural redesign.
-
----
-
-## 13. Testing Strategy
-
-The structure enables:
-
-- Use case unit testing
-- Repository testing
-- DAO instrumentation testing
-- Flow testing
-- ViewModel verification
-- Compose UI testing
-
-Future CI integration may enforce coverage and static analysis.
-
----
-
-## 14. Known Limitations
-
-The current scope excludes:
-
-- RemoteMediator
-- Full offline cache strategy
-- Advanced retry mechanisms
-- Analytics
-- Crash reporting
-- Multi-language support
-- Deep linking
-- Modular separation
-- Complete automated test suite
-- Performance benchmarking reports
-
-All features remain architecturally feasible.
-
----
-
-## 15. Conclusion
-
-The implementation demonstrates:
-
-- Structured architectural layering
-- Reactive state modeling
-- Production-aware separation of concerns
-- Scalability readiness
-- Maintainable system design
-
----
-
----
-
-# 🇪🇸 Instrucciones Importantes – Configuración (Español)
-
-La implementación activa del proyecto se encuentra en la rama `dev`.
-
-Antes de compilar la aplicación:
-
-1. Clonar el repositorio.
-2. Cambiar a la rama `dev`:3. Abrir el proyecto en Android Studio (versión estable más reciente recomendada).
-4. Sincronizar Gradle.
-5. Ejecutar la aplicación en:
-- Un emulador Android (API 26+ recomendado), o
-- Un dispositivo físico con depuración USB activada.
-
-Requisitos mínimos:
-- Android Studio Iguana o superior
-- Kotlin 1.9+
-- Gradle 8+
-- JDK 17
-
----
-
-# 🇪🇸 Pokédex – Documentación de Arquitectura Android de Nivel Empresarial
-
----
-
-## 1. Descripción General del Proyecto
-
-Este documento describe la estructura arquitectónica, decisiones de diseño, consideraciones de escalabilidad y características de preparación para producción de la aplicación Pokédex.
-
-La implementación sigue estándares modernos de desarrollo Android, priorizando:
-
-- Arquitectura limpia
-- Gestión reactiva del estado
-- Separación clara de responsabilidades
-- Diseño orientado a la testabilidad
-- Preparación para escalabilidad
-- Mantenibilidad a largo plazo
-
----
-
-## 2. Principios Arquitectónicos
-
-El sistema se fundamenta en:
-
-- Inversión de dependencias
-- Separación de responsabilidades
-- Estado inmutable
-- Flujos reactivos
-- Fuente única de verdad
-- Dominio independiente de la plataforma
-- Mapeo explícito entre capas
-- Conciencia del ciclo de vida
-
----
-
-## 3. Arquitectura General
-
-Capa de Presentación  
-↓  
-Capa de Dominio  
-↓  
-Capa de Datos  
-
-Las dependencias fluyen hacia el interior.
-
----
-
-## 4. Responsabilidades por Capa
-
-### 4.1 Capa de Presentación
-
-- Renderizado UI con Jetpack Compose
-- Observación de estado desde ViewModels
-- Emisión de interacciones
-- Gestión de navegación
-
----
-
-### 4.2 Capa de Dominio
-
-- Lógica de negocio
-- Contratos de repositorio
-- Casos de uso
-- Entidades puras
-
----
-
-### 4.3 Capa de Datos
-
-- Integración con API
-- Persistencia con Room
-- Gestión de paginación
-- Mapeo DTO → Dominio
-- Implementación de repositorio
-
----
-
-## 5. Flujo de Datos
-
-Interacción Usuario  
-→ ViewModel  
-→ Caso de Uso  
-→ Repositorio  
-→ Fuente de Datos  
-→ Mapeo Dominio  
-→ Emisión Flow  
-→ Recomposición UI  
-
----
-
-## 6. Gestión de Estado
-
-- Estado inmutable
-- Flow reactivo
-- Cancelación estructurada
-- Recomposición controlada
-
----
-
-## 7. Paginación
-
-Paging3 permite:
-
-- Carga incremental
-- Optimización de memoria
-- Rendimiento fluido
-
----
-
-## 8. Persistencia
-
-Favoritos almacenados con Room:
-
-- Entidades separadas
-- DAO reactivo
-- Versionado de base de datos
-
----
-
-## 9. Rendimiento
-
-Incluye:
-
-- Renderizado perezoso
-- Minimización de recomposición
-- Observación consciente del ciclo de vida
-
-Mejoras futuras posibles:
-
-- Baseline Profiles
-- Macrobenchmark
-- Perfilado de memoria
-
----
-
-## 10. Manejo de Errores
-
-- Propagación reactiva
-- Extensible a estados sellados y políticas de reintento
-
----
-
-## 11. Seguridad
-
-- Inyección de dependencias
-- Encapsulación
-- Preparado para cifrado y pinning de certificados
-
----
-
-## 12. Escalabilidad
-
-- Modularización futura
-- Arquitectura offline-first
-- Sincronización en segundo plano
-
----
-
-## 13. Limitaciones Actuales
-
-- Sin RemoteMediator
-- Sin cache offline completa
-- Sin analítica
-- Sin crash reporting
-- Sin cobertura completa de pruebas
-
-Todas extensibles dentro de la arquitectura actual.
-
----
-
-## 14. Conclusión
-
-La aplicación refleja:
-
-- Diseño arquitectónico estructurado
-- Flujo reactivo profesional
-- Separación clara de responsabilidades
-- Preparación para escalabilidad
-- Enfoque mantenible a largo plazo# Pokédex – Enterprise-Grade Android Architecture Documentation
-Clean Architecture | Jetpack Compose | Kotlin | Coroutines | Flow | Hilt | Room | Paging3 | Material 3
-
----
-
-🇬🇧 English Version  
-🇪🇸 [Ir a la versión en Español](#-pokedex--documentación-de-arquitectura-android-de-nivel-empresarial)
-
----
-
-# 🇬🇧 Pokédex – Enterprise-Grade Android Architecture Documentation
-
----
-
-## 1. Project Overview
-
-This document describes the architectural structure, design decisions, scalability considerations, and production-readiness characteristics of the Pokédex Android application.
-
-The application is implemented using modern Android development standards, emphasizing:
-
-- Clean architectural layering
-- Reactive state management
-- Clear separation of concerns
-- Testability-oriented design
-- Scalability readiness
-- Maintainability over time
-
-This documentation reflects engineering decisions at a senior architectural level.
-
----
-
-## 2. Architectural Principles
-
-The system is built upon the following principles:
-
-- Dependency inversion
-- Separation of responsibilities
-- Immutable state modeling
-- Reactive data streams
-- Single source of truth
-- Platform-independent domain logic
-- Explicit mapping between layers
-- Lifecycle awareness
-
-Architectural decisions prioritize long-term maintainability and extensibility.
-
----
-
-## 3. High-Level Architecture
-
-The application follows Clean Architecture:
-
-Presentation Layer  
-↓  
-Domain Layer  
-↓  
-Data Layer  
-
-Dependencies flow inward. Outer layers depend on inner abstractions only.
-
----
-
-## 4. Layer Responsibilities
-
-### 4.1 Presentation Layer
-
-Responsibilities:
-
-- Rendering UI using Jetpack Compose
-- Observing state from ViewModels
-- Emitting user interactions
-- Managing navigation
-
-Characteristics:
-
-- Stateless composables
-- State hoisting
-- Immutable UI state models
-- Lifecycle-aware Flow collection
-- Clear separation between UI and logic
-
-No business logic is implemented within composables.
-
----
-
-### 4.2 Domain Layer
-
-Responsibilities:
-
-- Business logic orchestration
-- Definition of repository contracts
-- Use case abstraction
-- Pure domain modeling
-
-Characteristics:
-
-- Kotlin-only implementation
-- No Android framework dependencies
-- Fully testable in isolation
-- Explicit use case classes per business operation
+### Implemented UseCases
 
-Domain entities are independent from API or database schemas.
+- AuthenticateUserUseCase
+- CheckSessionUseCase
+- LogoutUseCase
+- SearchPokemonUseCase
+- ToggleFavoriteUseCase
+- GetFavoritePokemonUseCase
+- ObserveFavoriteStatusUseCase
 
----
-
-### 4.3 Data Layer
-
-Responsibilities:
-
-- Remote API integration (Retrofit)
-- Local persistence (Room)
-- Paging data management (Paging3)
-- DTO-to-domain mapping
-- Repository implementation
-
-Characteristics:
-
-- Explicit mappers between layers
-- Flow-based data emission
-- Clear separation between network, database, and repository logic
-- Encapsulation of data source complexity
-
-The repository coordinates remote and local sources without exposing implementation details to upper layers.
-
----
-
-## 5. Data Flow Model
-
-User Interaction  
-→ ViewModel  
-→ Use Case  
-→ Repository  
-→ Remote / Local Data Source  
-→ Domain Model Mapping  
-→ Flow Emission  
-→ UI Recomposition  
-
-The system enforces unidirectional data flow.
-
-State changes are reactive and lifecycle-aware.
-
----
-
-## 6. State Management Strategy
-
-The state management approach includes:
-
-- Immutable UI state data classes
-- Single state holder per screen
-- Flow-based state exposure
-- Structured coroutine scope usage
-- Lifecycle-aware state collection
-
-Compose recomposition is triggered only by state updates.
-
-No mutable shared state is used.
-
----
-
-## 7. Paging Strategy
-
-Paging3 is used to:
-
-- Avoid loading entire datasets into memory
-- Reduce UI blocking
-- Enable incremental loading
-- Improve scroll performance
-
-LazyVerticalGrid ensures efficient rendering of paged content.
-
-Stable keys are applied to reduce unnecessary recomposition.
-
----
-
-## 8. Persistence Strategy
-
-Favorites are stored locally using Room.
-
-Design characteristics:
-
-- Separate Entity model
-- Flow-based DAO methods
-- Repository-level toggle logic
-- Reactive updates across UI
-
-Database versioning is supported.
-
-Schema separation prevents domain leakage.
-
----
-
-## 9. Performance Considerations
-
-The application incorporates:
-
-- Lazy rendering
-- Incremental pagination
-- Lifecycle-aware collection
-- Controlled recomposition
-- Clear separation between computation and rendering
-
-Potential performance enhancements include:
-
-- Baseline profile generation
-- Macrobenchmark integration
-- StrictMode configuration
-- Startup optimization
-- Memory profiling
-
----
-
-## 10. Error Handling Strategy
-
-Current implementation supports error propagation through reactive streams.
-
-Production-ready enhancements may include:
-
-- Sealed result models
-- Explicit UI error states
-- Retry policies
-- Network connectivity monitoring
-- Structured error mapping
-
----
-
-## 11. Security Considerations
-
-The architecture supports:
-
-- Dependency injection boundaries
-- No hardcoded secrets
-- Repository encapsulation
-
-Production-level security improvements may include:
-
-- Certificate pinning
-- Encrypted local database
-- Secure API key storage
-- Obfuscation strategies
-- Secure network configuration
-
----
-
-## 12. Scalability Model
-
-The current architecture supports:
-
-- Modularization by feature
-- Multi-module separation
-- RemoteMediator integration
-- Offline-first architecture
-- Background synchronization
-- Feature flag integration
-
-The separation of concerns enables scaling without major refactoring.
-
----
-
-## 13. Testing Strategy
-
-The architecture enables:
-
-- Unit testing of use cases
-- Repository testing with mocked data sources
-- DAO instrumentation testing
-- Flow testing
-- ViewModel state verification
-- Compose UI testing
-
-Future expansion includes:
-
-- Continuous integration enforcement
-- Code coverage monitoring
-- Static analysis integration
-
----
-
-## 14. CI/CD Considerations
-
-Production integration would include:
-
-- Automated builds
-- Lint enforcement
-- Static code analysis
-- Automated test pipelines
-- Versioned release builds
-- Play Store staged rollout
-- Crash monitoring integration
-
----
-
-## 15. Accessibility & UX Compliance
-
-The architecture supports:
-
-- Content descriptions
-- Semantic roles
-- Dynamic font scaling
-- High contrast compatibility
-
-Formal accessibility audits would validate compliance.
-
----
-
-## 16. Known Limitations
-
-The current scope excludes:
-
-- RemoteMediator
-- Full offline caching strategy
-- Advanced retry mechanisms
-- Analytics integration
-- Crash reporting tools
-- Multi-language support
-- Deep linking
-- Modular feature separation
-- Full automated test suite
-- Performance instrumentation reports
-
-All features are structurally feasible within the current architecture.
-
----
-
-## 17. Conclusion
-
-This project demonstrates:
-
-- Clear architectural layering
-- Reactive state modeling
-- Production-aware separation of concerns
-- Structured data flow
-- Scalability readiness
-- Maintainable system design
-
-The implementation reflects professional Android engineering standards aligned with long-term product development.
-
----
-
----
-
-# 🇪🇸 Pokédex – Documentación de Arquitectura Android de Nivel Empresarial
-
-[Back to English](#-pokedex--enterprise-grade-android-architecture-documentation)
-
----
-
-## 1. Descripción General del Proyecto
-
-Este documento describe la estructura arquitectónica, decisiones de diseño, consideraciones de escalabilidad y características de preparación para producción de la aplicación Pokédex.
+The Domain layer remains completely independent from infrastructure and UI concerns.
 
-La aplicación está implementada bajo estándares modernos de desarrollo Android, priorizando:
-
-- Arquitectura limpia
-- Gestión reactiva del estado
-- Separación clara de responsabilidades
-- Diseño orientado a la testabilidad
-- Preparación para escalabilidad
-- Mantenibilidad a largo plazo
-
----
-
-## 2. Principios Arquitectónicos
-
-El sistema se fundamenta en:
-
-- Inversión de dependencias
-- Separación de responsabilidades
-- Modelado de estado inmutable
-- Flujos reactivos
-- Fuente única de verdad
-- Dominio independiente de la plataforma
-- Mapeo explícito entre capas
-- Conciencia del ciclo de vida
-
----
-
-## 3. Arquitectura General
-
-La aplicación sigue Clean Architecture:
-
-Capa de Presentación  
-↓  
-Capa de Dominio  
-↓  
-Capa de Datos  
-
-Las dependencias fluyen hacia el interior.
-
----
-
-## 4. Responsabilidades por Capa
-
-### 4.1 Capa de Presentación
-
-Responsabilidades:
-
-- Renderizado UI con Jetpack Compose
-- Observación de estado desde ViewModels
-- Emisión de interacciones de usuario
-- Gestión de navegación
-
-Características:
-
-- Composables sin estado
-- Elevación de estado
-- Modelos de estado inmutables
-- Recolección de Flow consciente del ciclo de vida
-- Separación estricta entre UI y lógica
-
----
-
-### 4.2 Capa de Dominio
-
-Responsabilidades:
-
-- Orquestación de lógica de negocio
-- Definición de contratos de repositorio
-- Abstracción de casos de uso
-- Modelado de entidades puras
-
-Características:
-
-- Implementación en Kotlin puro
-- Sin dependencias de Android
-- Totalmente testeable
-- Casos de uso explícitos por operación
-
----
-
-### 4.3 Capa de Datos
-
-Responsabilidades:
-
-- Integración con API remota
-- Persistencia local con Room
-- Gestión de paginación
-- Mapeo DTO → Dominio
-- Implementación del repositorio
-
-Características:
-
-- Mapeadores explícitos
-- Emisión reactiva con Flow
-- Separación entre red, base de datos y repositorio
-
----
-
-## 5. Modelo de Flujo de Datos
-
-Interacción Usuario  
-→ ViewModel  
-→ Caso de Uso  
-→ Repositorio  
-→ Fuente de Datos  
-→ Mapeo a Dominio  
-→ Emisión Flow  
-→ Recomposición UI  
-
-El flujo es unidireccional y reactivo.
-
----
-
-## 6. Estrategia de Gestión de Estado
-
-- Estado inmutable
-- Fuente única de verdad
-- Flow como canal reactivo
-- Cancelación estructurada
-- Recomposición controlada
-
----
-
-## 7. Estrategia de Paginación
-
-Paging3 permite:
-
-- Carga incremental
-- Optimización de memoria
-- Rendimiento fluido
-- Renderizado eficiente con LazyVerticalGrid
-
----
-
-## 8. Estrategia de Persistencia
-
-Favoritos almacenados con Room:
-
-- Entidades separadas
-- DAO reactivo
-- Lógica encapsulada en repositorio
-- Soporte de versionado
-
----
-
-## 9. Consideraciones de Rendimiento
-
-Incluye:
-
-- Renderizado perezoso
-- Minimización de recomposición
-- Observación consciente del ciclo de vida
-
-Mejoras futuras:
-
-- Baseline Profiles
-- Macrobenchmark
-- Perfilado de memoria
-- Optimización de arranque
-
----
-
-## 10. Estrategia de Manejo de Errores
-
-Actualmente:
-
-- Propagación reactiva de errores
-
-Expansiones posibles:
-
-- Estados sellados de error
-- Políticas de reintento
-- Monitoreo de conectividad
-- Mapeo estructurado de excepciones
-
----
-
-## 11. Consideraciones de Seguridad
-
-- Inyección de dependencias
-- Sin secretos hardcodeados
-- Encapsulación de repositorio
-
-Mejoras posibles:
-
-- Pinning de certificados
-- Base de datos cifrada
-- Protección avanzada de red
-
----
-
-## 12. Modelo de Escalabilidad
-
-Soporta:
-
-- Modularización por feature
-- Arquitectura offline-first
-- Integración RemoteMediator
-- Sincronización en segundo plano
-
----
-
-## 13. Estrategia de Testing
-
-Permite:
-
-- Tests unitarios de dominio
-- Tests de repositorio
-- Tests DAO
-- Tests UI Compose
-- Integración CI futura
-
----
-
-## 14. CI/CD
-
-Preparado para:
-
-- Build automatizado
-- Linting
-- Análisis estático
-- Pipeline de pruebas
-- Publicación controlada
-
----
-
-## 15. Limitaciones Actuales
-
-- Sin RemoteMediator
-- Sin cache offline completa
-- Sin analítica
-- Sin crash reporting
-- Sin modularización
-- Sin cobertura de pruebas completa
-
-Todas son extensibles dentro de la arquitectura actual.
-
 ---
 
-## 16. Conclusión
+## 2.2 Data Layer
 
-La aplicación refleja:
+Responsible for:
 
-- Diseño arquitectónico claro
-- Flujo reactivo estructurado
-- Separación profesional de responsabilidades
-- Preparación para escalabilidad
-- Enfoque mantenible a largo plazo
+- Remote API communication (Retrofit)
+- Local database persistence (Room)
+- Encrypted session storage (EncryptedSharedPreferences)
+- Repository implementations
+- DTO to Domain mapping
 
-Representa un estándar de ingeniería Android de nivel profesional.# 📱 Pokédex – Production-Grade Android Application  
-### Clean Architecture | Jetpack Compose | Hilt | Room | Paging3 | Material 3
+### Room Configuration
 
----
-
-🇬🇧 **English Version**  
-🇪🇸 [Ir directamente a la versión en Español](#-pokedex--aplicación-android-de-nivel-producción)
-
----
+**Entity**
+- FavoritePokemonEntity
 
-# 🇬🇧 Pokédex – Production-Grade Android Application
+**DAO**
+- insertFavorite()
+- deleteFavoriteById()
+- getAllFavorites() → PagingSource
+- observeFavoriteById()
 
----
+Favorites persist across:
 
-## Table of Contents
+- App restarts
+- Configuration changes
+- Process recreation
+- Offline usage
 
-1. Executive Summary  
-2. Vision & Engineering Philosophy  
-3. Application Preview  
-4. Architecture Overview  
-5. Layer-by-Layer Breakdown  
-6. Design System  
-7. State Management Strategy  
-8. Data Flow Diagram  
-9. Performance Strategy  
-10. Persistence Strategy  
-11. Scalability Model  
-12. Security Considerations  
-13. Testing Strategy (Planned & Missing)  
-14. CI/CD & DevOps Strategy (Future)  
-15. Known Limitations  
-16. Improvement Roadmap  
-17. Research Notes  
-18. Final Engineering Reflection  
+The data layer cleanly merges API results with locally stored favorites.
 
 ---
-
-# 1. Executive Summary
-
-This project represents a production-oriented Android application engineered using modern architectural standards and long-term scalability principles.
 
-The goal of this implementation is not educational replication, but architectural maturity demonstration.
+## 2.3 Presentation Layer
 
-The project applies:
+Built using:
 
-- Clean Architecture
-- Jetpack Compose (Declarative UI)
-- Kotlin Coroutines & Flow
+- Jetpack Compose
+- ViewModels
 - Hilt Dependency Injection
-- Room Local Persistence
-- Paging3 Efficient Data Loading
-- Material Design 3
-- Reactive State Handling
-- Unidirectional Data Flow
+- Kotlin Flow
+- Paging 3
 
-This repository is structured to reflect 10 years of Android engineering evolution.
+### Screens
 
----
-
-# 2. Vision & Engineering Philosophy
-
-This project was built under the following engineering principles:
-
-• Separation of concerns  
-• Dependency inversion  
-• Reactive UI  
-• Lifecycle awareness  
-• Performance-first thinking  
-• Clean testable layers  
-• Explicit state modeling  
-• Production scalability mindset  
-
-The goal is long-term maintainability over short-term feature velocity.
+- LoginScreen (Biometric Authentication)
+- HomeScreen (Search + Paging)
+- FavoritesScreen (Favorite Pokémon list)
 
 ---
 
-# 3. Application Preview
+# 3. Biometric Authentication
 
-## 🏠 Home Screen
-`[ SCREENSHOT_PLACEHOLDER_HOME ]`
+Authentication is implemented using:
 
-## 🔍 Search Feature
-`[ SCREENSHOT_PLACEHOLDER_SEARCH ]`
+- Android BiometricPrompt
+- AES-256 MasterKey
+- EncryptedSharedPreferences
+- LocalAuthRepository
 
-## ❤️ Favorites Feature
-`[ SCREENSHOT_PLACEHOLDER_FAVORITES ]`
+### Authentication Flow
 
-## 📄 Detail Screen
-`[ SCREENSHOT_PLACEHOLDER_DETAIL ]`
+1. Application launches
+2. CheckSessionUseCase verifies encrypted session
+3. If session exists → Navigate to Home
+4. If not → Show LoginScreen
+5. User taps Authenticate
+6. BiometricPrompt validates device owner (Fingerprint / Face Recognition)
+7. On success:
+   - Encrypted session flag stored securely
+   - Navigation to Home screen
 
-## 🌙 Dark Mode
-`[ SCREENSHOT_PLACEHOLDER_DARK_MODE ]`
+### Security Design
 
----
-
-# 🎥 Video Demonstration
-
-`[ VIDEO_DEMO_PLACEHOLDER – 2 to 3 minutes walkthrough ]`
-
-Recommended Video Sections:
-
-1. App Launch
-2. Paging Scroll Performance
-3. Favorite Toggle Persistence
-4. Navigation Flow
-5. Dark Mode
-6. Offline Behavior (if implemented)
+- No plaintext storage
+- No backend dependency
+- Fully local authentication
+- AuthRepository abstraction prepared for future Firebase integration
 
 ---
 
-# 4. Architecture Overview
+# 4. Firebase-Ready Architecture (Disabled)
 
-This application follows Clean Architecture:
+Authentication logic is abstracted via `AuthRepository`.
 
-Presentation Layer  
-↓  
-Domain Layer  
-↓  
-Data Layer  
+Active implementation:
+- LocalAuthRepository
+
+Scaffolded but disabled:
+- FirebaseAuthRepository
+
+To enable Firebase in the future:
+- Replace Hilt binding from LocalAuthRepository to FirebaseAuthRepository
+- Add Firebase configuration files
+- No changes required in Domain or Presentation layers
+
+This ensures scalability without introducing unnecessary runtime complexity.
 
 ---
 
-## High-Level Responsibility Split
+# 5. Advanced Search System
 
-### Presentation
-- UI Rendering (Compose)
-- State Collection
-- Navigation
+The Home screen supports dynamic search by:
+
+- Name
+- ID
+- Pokémon Type
+
+### Search Logic
+
+- Numeric input → Search by ID
+- Valid Pokémon type → Search by Type
+- Otherwise → Search by Name
+
+### Search Bar Hints
+
+English:
+"Search by name, ID, or type"
+
+Spanish:
+"Buscar por nombre, ID o tipo (ej. fuego, agua, planta)"
+
+Search integrates with Paging 3 and supports filtering and sorting preferences.
+
+---
+
+# 6. Favorites System
+
+Users can:
+
+- Tap a heart icon to add/remove favorites
+- See animated state transitions
+- Navigate to a dedicated Favorites screen
+- Persist favorites locally via Room
+
+### Features
+
+- Optimistic UI updates
+- Flow-based observation
+- Paging 3 integration
+- Offline persistence
+- Survives process death and configuration changes
+
+Favorites are merged with remote data to ensure accurate UI representation.
+
+---
+
+# 7. Testing Strategy
+
+Testing stack:
+
+- JUnit 4
+- Mockito
+- Robolectric
+- Turbine
+- Espresso
+- Hilt Testing
+- kotlinx-coroutines-test
+
+## 7.1 Unit Tests (app/src/test)
+
+Structured under:Coverage includes:
+
+- Domain UseCases
+- Repository logic
+- ViewModel behavior
+- Search logic branching
+- Favorites merging logic
+- Biometric session handling
+
+Target coverage:
+
+- Domain ≥ 90%
+- ViewModels ≥ 85%
+- Data ≥ 80%
+
+---
+
+## 7.2 UI Tests (app/src/androidTest)
+
+Covers:
+
+- Login flow
+- Biometric trigger behavior (mocked)
+- Search input behavior
+- Favorites toggle behavior
+- Paging rendering
+- Configuration change persistence
+
+Critical user journeys are fully tested.
+
+---
+
+# 8. How to Run the Project
+
+1. Clone the repository
+2. Checkout the `dev` branch
+3. Open the project in Android Studio (latest stable)
+4. Sync Gradle
+5. Run on an emulator or physical device with biometric capability enabled
+
+No Firebase configuration required.
+
+---
+
+# 9. Conclusion
+
+This implementation demonstrates:
+
+- Clean Architecture discipline
+- Production-ready biometric authentication
+- Scalable authentication abstraction
+- Advanced multi-criteria search
+- Persistent favorites system
+- Strong automated testing coverage
+- Enterprise-level Android engineering standards
+
+The project reflects readiness for professional Android development environments and scalable real-world applications.
+
+---
+
+## Pokemon App - Documentacion tecnica 
+**Rama:** `dev` 
+**Autor:** Kevin Roditi 
+🇬🇧 [English Version](#pokemon-app---technical-documentation) ---
+
+# 1. Descripción General
+
+Pokémon App es una aplicación Android lista para producción construida con **Kotlin**, **Jetpack Compose**, **Clean Architecture** y **MVVM**.
+
+El proyecto demuestra estándares de ingeniería Android de nivel senior, con enfoque en:
+
+- Separación estricta de responsabilidades
+- Arquitectura escalable y mantenible
+- Autenticación biométrica
+- Sistema avanzado de búsqueda
+- Sistema de favoritos persistente
+- Enfoque offline-first
+- Testing automatizado completo
+- Arquitectura preparada para Firebase (deshabilitada)
+
+Toda la implementación se encuentra en la rama `dev`.
+
+---
+
+# 2. Arquitectura
+
+La aplicación sigue **Clean Architecture**, dividida en:## 2.1 Capa Domain
+
+- Kotlin puro
+- Sin dependencias del framework Android
+- Totalmente testeable
+- Contiene:
+  - Modelos de dominio
+  - Interfaces de repositorio
+  - Casos de uso
+
+Casos de uso implementados:
+
+- AuthenticateUserUseCase
+- CheckSessionUseCase
+- LogoutUseCase
+- SearchPokemonUseCase
+- ToggleFavoriteUseCase
+- GetFavoritePokemonUseCase
+- ObserveFavoriteStatusUseCase
+
+---
+
+## 2.2 Capa Data
+
+Responsable de:
+
+- Comunicación con API (Retrofit)
+- Persistencia local con Room
+- Almacenamiento de sesión cifrado
+- Implementaciones de repositorios
+- Mapeo DTO → Domain
+
+Room incluye:
+
+- FavoritePokemonEntity
+- DAO para insertar, eliminar y observar favoritos
+
+Los favoritos persisten tras:
+
+- Reinicio de la aplicación
+- Cambios de configuración
+- Muerte del proceso
+- Uso sin conexión
+
+---
+
+## 2.3 Capa Presentation
+
+Construida con:
+
+- Jetpack Compose
 - ViewModels
+- Hilt
+- Kotlin Flow
+- Paging 3
 
-### Domain
-- Business Logic
-- Use Cases
-- Repository Contracts
-- Pure Models
+Pantallas:
 
-### Data
-- API Service (Retrofit)
-- DTOs
-- Mappers
-- Paging Source
-- Room Database
-- Repository Implementation
+- LoginScreen (Autenticación biométrica)
+- HomeScreen (Búsqueda + Paging)
+- FavoritesScreen (Lista de favoritos)
 
 ---
 
-# 5. Layer-by-Layer Breakdown
+# 3. Autenticación Biométrica
 
-## Presentation Layer
+Implementada con:
 
-Responsible for:
-- Rendering UI
-- Observing state
-- Triggering user events
+- BiometricPrompt
+- MasterKey AES-256
+- EncryptedSharedPreferences
+- LocalAuthRepository
 
-Contains:
-- Screens
-- ViewModels
-- Navigation Graph
+Flujo:
 
-Uses:
-- collectAsStateWithLifecycle
-- Immutable UI state
-- Stateless composables
+1. La app inicia
+2. Se verifica la sesión cifrada
+3. Si existe → Navega a Home
+4. Si no → Muestra Login
+5. Usuario se autentica con biometría
+6. Se guarda sesión cifrada
+7. Navegación a Home
 
----
+Diseño de seguridad:
 
-## Domain Layer
-
-Responsible for:
-- Abstract business logic
-- Repository abstraction
-- Use case orchestration
-
-Contains:
-- UseCases
-- Domain Models
-- Repository Interface
-
-No Android dependencies.
+- Sin almacenamiento en texto plano
+- Sin dependencia backend
+- Arquitectura lista para integrar Firebase en el futuro
 
 ---
 
-## Data Layer
+# 4. Arquitectura Preparada para Firebase
 
-Responsible for:
-- Data retrieval
-- Data transformation
-- Persistence
-- Paging
+AuthRepository abstrae la autenticación.
 
-Contains:
-- Retrofit service
-- DTO classes
-- Mappers
-- Room DAO
-- Database
-- Repository Implementation
+Implementación activa:
+- LocalAuthRepository
 
----
+Implementación futura:
+- FirebaseAuthRepository (deshabilitada)
 
-# 6. Design System
-
-Material 3 is used as base.
-
-### Typography
-- Structured heading hierarchy
-- Consistent scale usage
-
-### Color Strategy
-- Light/Dark theme supported
-- Semantic color usage
-
-### Components
-- Card-based grid layout
-- Heart icon toggle
-- Pull-to-refresh
-- Animated transitions (optional extension)
+Para activar Firebase:
+- Cambiar binding en Hilt
+- Agregar configuración
+- Sin modificar Domain ni Presentation
 
 ---
 
-# 7. State Management Strategy
+# 5. Sistema Avanzado de Búsqueda
 
-State is:
+Permite buscar por:
 
-- Immutable
-- Lifecycle-aware
-- Collected via Flow
-- Exposed through ViewModel
-- Rendered declaratively
+- Nombre
+- ID
+- Tipo
 
-Unidirectional Data Flow:
+Lógica:
 
-UI Event → ViewModel → Repository → Data Source → Flow → UI
+- Entrada numérica → ID
+- Tipo válido → Tipo
+- Otro texto → Nombre
 
----
-
-# 8. Data Flow Diagram
-
-User Action  
-↓  
-ViewModel  
-↓  
-UseCase  
-↓  
-Repository  
-↓  
-Remote / Local  
-↓  
-Mapped Domain Model  
-↓  
-Flow Emission  
-↓  
-Compose Recomposition  
+Hint en español:
+"Buscar por nombre, ID o tipo (ej. fuego, agua, planta)"
 
 ---
 
-# 9. Performance Strategy
+# 6. Sistema de Favoritos
 
-- Paging3 prevents full dataset memory load
-- LazyVerticalGrid minimizes recomposition cost
-- State hoisting avoids unnecessary UI rebuilds
-- Flow prevents over-emission
-- Lifecycle-aware collection prevents memory leaks
+El usuario puede:
 
----
+- Marcar/desmarcar favoritos
+- Ver animación de corazón
+- Acceder a pantalla dedicada de favoritos
+- Persistencia local con Room
 
-# 10. Persistence Strategy
+Sobrevive a:
 
-Favorites stored using Room.
-
-Design Decisions:
-
-- Separate Entity from Domain Model
-- DAO returns Flow
-- Toggle logic handled in Repository
-- No UI-level database calls
-- Reactive updates across screens
+- Reinicio
+- Muerte de proceso
+- Rotación de pantalla
 
 ---
 
-# 11. Scalability Model
+# 7. Estrategia de Testing
 
-To scale this application:
+Stack:
 
-- Convert to multi-module architecture
-- Implement RemoteMediator
-- Introduce NetworkBoundResource
-- Add background sync with WorkManager
-- Add caching layer for details
-- Add modular feature splits
+- JUnit
+- Mockito
+- Robolectric
+- Turbine
+- Espresso
+- Hilt Testing
 
----
+Cobertura objetivo:
 
-# 12. Security Considerations
+- Domain ≥ 90%
+- ViewModels ≥ 85%
+- Data ≥ 80%
 
-- No hardcoded secrets
-- Clear network abstraction
-- Structured dependency injection
-- No business logic in UI
-
-Future Enhancements:
-- SSL pinning
-- API key encryption
-- Secure storage for tokens
+Flujos críticos de usuario completamente cubiertos.
 
 ---
 
-# 13. Testing Strategy
+# 8. Ejecución
 
-## Currently Missing
+1. Clonar repositorio
+2. Cambiar a rama `dev`
+3. Abrir en Android Studio
+4. Ejecutar en dispositivo con biometría habilitada
 
-- Unit tests for DAO
-- Repository unit tests
-- UseCase tests
-- UI Compose tests
-- Integration tests
-
-## Future Plan
-
-- JUnit5
-- MockK
-- Turbine for Flow testing
-- Compose testing framework
-- CI automation
+No requiere configuración de Firebase.
 
 ---
 
-# 14. CI/CD & DevOps Strategy (Future)
+# 9. Conclusión
 
-Planned:
+Este proyecto demuestra:
 
-- GitHub Actions
-- Lint enforcement
-- Ktlint formatting check
-- Unit test coverage report
-- Build verification
-- Play Store deployment automation
+- Disciplina en Clean Architecture
+- Seguridad biométrica lista para producción
+- Arquitectura escalable
+- Búsqueda avanzada multi-criterio
+- Favoritos persistentes
+- Testing sólido
+- Estándares Android de nivel empresarial
 
----
-
-# 15. Known Limitations
-
-- No RemoteMediator
-- No offline full caching
-- No error UI states
-- No retry strategy
-- No connectivity monitoring
-- No crash reporting
-- No analytics
-- No accessibility audit
-- No image caching policy optimization
-- No multi-language support yet
-- No modularization
-- No performance profiling report
-
----
-
-# 16. Improvement Roadmap
-
-## Phase 2 – Refinement
-- Add UI animations
-- Add shared element transitions
-- Implement design tokens
-- Improve error state UX
-- Add retry logic
-
-## Phase 3 – Production Hardening
-- Add tests
-- Add CI/CD
-- Add monitoring
-- Add analytics
-- Modularize project
-- Add accessibility compliance
-- Add performance tracing
-
----
-
-# 17. Research Notes
-
-This project reflects architectural patterns influenced by:
-
-- Uncle Bob Clean Architecture
-- Official Android Architecture Guidelines
-- Reactive programming principles
-- Modern declarative UI paradigms
-
-It is designed for longevity, not tutorial simplicity.
-
----
-
-# 18. Final Engineering Reflection
-
-This project represents a convergence of:
-
-- Architectural clarity
-- Production mindset
-- Reactive UI modeling
-- Persistence strategy design
-- Performance discipline
-- Long-term scalability planning
-
-It demonstrates not only implementation capability but architectural maturity.
-
----
-
----
-
-# 🇪🇸 Pokédex – Aplicación Android de Nivel Producción
-
-[Volver a la versión en Inglés](#-pokedex--production-grade-android-application)
-
----
-
-# 1. Resumen Ejecutivo
-
-Este proyecto representa una aplicación Android moderna, escalable y estructurada bajo principios de arquitectura limpia.
-
-Demuestra:
-
-- Arquitectura desacoplada
-- UI declarativa con Compose
-- Inyección de dependencias con Hilt
-- Persistencia con Room
-- Paginación eficiente con Paging3
-- Flujo reactivo con Kotlin Flow
-- Gestión correcta del ciclo de vida
-
-No es un proyecto tutorial.  
-Es una demostración de madurez arquitectónica.
-
----
-
-# 2. Filosofía de Ingeniería
-
-Principios aplicados:
-
-- Separación de responsabilidades
-- Inversión de dependencias
-- Flujo unidireccional de datos
-- Modelado explícito del estado
-- Diseño preparado para escalar
-
----
-
-# 3. Vista de la Aplicación
-
-🏠 Pantalla Principal  
-`[ SCREENSHOT_HOME ]`
-
-❤️ Favoritos  
-`[ SCREENSHOT_FAVORITES ]`
-
-📄 Detalle  
-`[ SCREENSHOT_DETAIL ]`
-
-🌙 Modo Oscuro  
-`[ SCREENSHOT_DARK ]`
-
----
-
-# 4. Arquitectura
-
-Presentación  
-↓  
-Dominio  
-↓  
-Datos  
-
-Separación estricta entre capas.
-
----
-
-# 5. Rendimiento
-
-- Paginación eficiente
-- UI reactiva
-- Minimización de recomposición
-- Recolección consciente del ciclo de vida
-
----
-
-# 6. Limitaciones Actuales
-
-- Sin pruebas automatizadas
-- Sin RemoteMediator
-- Sin monitoreo de red
-- Sin CI/CD
-- Sin analítica
-- Sin modularización
-
----
-
-# 7. Próximas Mejoras
-
-- Pruebas unitarias
-- Pruebas UI
-- Modularización
-- Integración continua
-- Mejoras de accesibilidad
-- Optimización avanzada de caché
-
----
-
-# 8. Reflexión Final
-
-Este proyecto demuestra no solo implementación técnica,  
-sino criterio arquitectónico y visión a largo plazo.
-
-Representa un estándar profesional de desarrollo Android moderno.
-
----
-
+Representa preparación para entornos profesionales de desarrollo Android y aplicaciones reales escalables.
