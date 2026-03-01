@@ -4,31 +4,14 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -39,10 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.kevinroditi.pokemonapp_kevinroditi.R
 import com.kevinroditi.pokemonapp_kevinroditi.core.extensions.capitalizeFirstLetter
 import com.kevinroditi.pokemonapp_kevinroditi.domain.model.Pokemon
 import com.kevinroditi.pokemonapp_kevinroditi.domain.model.PokemonDetail
@@ -106,7 +91,7 @@ fun DetailContent(
                     IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.back)
                         )
                     }
                 },
@@ -188,23 +173,23 @@ fun DetailContent(
 
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    Text(text = "About", style = typography.titleLarge)
+                    Text(text = stringResource(R.string.about), style = typography.titleLarge)
                     Spacer(modifier = Modifier.height(8.dp))
                     
                     Row(modifier = Modifier.fillMaxWidth()) {
                         Column(modifier = Modifier.weight(1f)) {
-                            Text(text = "Weight", style = typography.labelMedium)
+                            Text(text = stringResource(R.string.weight), style = typography.labelMedium)
                             Text(text = "${pokemon.weight / 10f} kg", style = typography.bodyLarge)
                         }
                         Column(modifier = Modifier.weight(1f)) {
-                            Text(text = "Height", style = typography.labelMedium)
+                            Text(text = stringResource(R.string.height), style = typography.labelMedium)
                             Text(text = "${pokemon.height / 10f} m", style = typography.bodyLarge)
                         }
                     }
 
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    Text(text = "Base Stats", style = typography.titleLarge)
+                    Text(text = stringResource(R.string.base_stats), style = typography.titleLarge)
                     Spacer(modifier = Modifier.height(8.dp))
                     for (stat in pokemon.stats) {
                         StatBar(stat = stat, color = backgroundColor)
@@ -213,7 +198,7 @@ fun DetailContent(
 
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    Text(text = "Abilities", style = typography.titleLarge)
+                    Text(text = stringResource(R.string.abilities), style = typography.titleLarge)
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = pokemon.abilities.joinToString(", ") { it.capitalizeFirstLetter() },

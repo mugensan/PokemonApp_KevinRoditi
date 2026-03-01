@@ -12,8 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.kevinroditi.pokemonapp_kevinroditi.core.extensions.capitalizeFirstLetter
+import com.kevinroditi.pokemonapp_kevinroditi.R
 import com.kevinroditi.pokemonapp_kevinroditi.domain.model.Stat
 
 @Composable
@@ -33,12 +34,22 @@ fun StatBar(
         animationStarted = true
     }
 
+    val statLabel = when (stat.name.lowercase()) {
+        "hp" -> stringResource(R.string.stat_hp)
+        "attack" -> stringResource(R.string.stat_attack)
+        "defense" -> stringResource(R.string.stat_defense)
+        "special-attack" -> stringResource(R.string.stat_special_attack)
+        "special-defense" -> stringResource(R.string.stat_special_defense)
+        "speed" -> stringResource(R.string.stat_speed)
+        else -> stat.name
+    }
+
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = stat.name.capitalizeFirstLetter(),
+            text = statLabel,
             modifier = Modifier.weight(0.3f),
             style = MaterialTheme.typography.labelMedium
         )

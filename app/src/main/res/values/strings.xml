@@ -7,4 +7,54 @@
     <string name="auth_failed">Authentication failed. Please try again.</string>
     <string name="biometrics_not_available">Biometrics not available. Please check settings.</string>
     <string name="favorites">Favorites</string>
+    <string name="no_favorites_yet">No favorites yet</string>
+
+    <!-- Detail Screen -->
+    <string name="about">About</string>
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+    <string name="base_stats">Base Stats</string>
+    <string name="abilities">Abilities</string>
+    <string name="back">Back</string>
+
+    <!-- Stats -->
+    <string name="stat_hp">HP</string>
+    <string name="stat_attack">Attack</string>
+    <string name="stat_defense">Defense</string>
+    <string name="stat_special_attack">Sp. Atk</string>
+    <string name="stat_special_defense">Sp. Def</string>
+    <string name="stat_speed">Speed</string>
+
+    <!-- Types -->
+    <string name="type_fire">Fire</string>
+    <string name="type_water">Water</string>
+    <string name="type_electric">Electric</string>
+    <string name="type_grass">Grass</string>
+    <string name="type_psychic">Psychic</string>
+    <string name="type_dragon">Dragon</string>
+    <string name="type_dark">Dark</string>
+    <string name="type_fairy">Fairy</string>
+    <string name="type_ghost">Ghost</string>
+    <string name="type_steel">Steel</string>
+    <string name="type_ice">Ice</string>
+    <string name="type_rock">Rock</string>
+    <string name="type_ground">Ground</string>
+    <string name="type_poison">Poison</string>
+    <string name="type_flying">Flying</string>
+    <string name="type_bug">Bug</string>
+    <string name="type_normal">Normal</string>
+    <string name="type_fighting">Fighting</string>
+
+    <!-- Filters -->
+    <string name="filters">Filters</string>
+    <string name="only_favorites">Only Favorites</string>
+    <string name="type">Type</string>
+    <string name="all">All</string>
+    <string name="sort_order">Sort Order</string>
+    <string name="apply">Apply</string>
+    <string name="sort_default">Default</string>
+    <string name="sort_id_asc">ID (Low to High)</string>
+    <string name="sort_id_desc">ID (High to Low)</string>
+    <string name="sort_name_asc">Name (A-Z)</string>
+    <string name="sort_name_desc">Name (Z-A)</string>
 </resources>

@@ -7,4 +7,54 @@
     <string name="auth_failed">Error de autenticación. Inténtalo de nuevo.</string>
     <string name="biometrics_not_available">Biometría no disponible. Comprueba los ajustes.</string>
     <string name="favorites">Favoritos</string>
+    <string name="no_favorites_yet">Aún no hay favoritos</string>
+
+    <!-- Detail Screen -->
+    <string name="about">Sobre</string>
+    <string name="weight">Peso</string>
+    <string name="height">Altura</string>
+    <string name="base_stats">Estadísticas base</string>
+    <string name="abilities">Habilidades</string>
+    <string name="back">Atrás</string>
+
+    <!-- Stats -->
+    <string name="stat_hp">HP</string>
+    <string name="stat_attack">Ataque</string>
+    <string name="stat_defense">Defensa</string>
+    <string name="stat_special_attack">At. Esp.</string>
+    <string name="stat_special_defense">Def. Esp.</string>
+    <string name="stat_speed">Velocidad</string>
+
+    <!-- Types -->
+    <string name="type_fire">Fuego</string>
+    <string name="type_water">Agua</string>
+    <string name="type_electric">Eléctrico</string>
+    <string name="type_grass">Planta</string>
+    <string name="type_psychic">Psíquico</string>
+    <string name="type_dragon">Dragón</string>
+    <string name="type_dark">Siniestro</string>
+    <string name="type_fairy">Hada</string>
+    <string name="type_ghost">Fantasma</string>
+    <string name="type_steel">Acero</string>
+    <string name="type_ice">Hielo</string>
+    <string name="type_rock">Roca</string>
+    <string name="type_ground">Tierra</string>
+    <string name="type_poison">Veneno</string>
+    <string name="type_flying">Volador</string>
+    <string name="type_bug">Bicho</string>
+    <string name="type_normal">Normal</string>
+    <string name="type_fighting">Lucha</string>
+
+    <!-- Filters -->
+    <string name="filters">Filtros</string>
+    <string name="only_favorites">Solo Favoritos</string>
+    <string name="type">Tipo</string>
+    <string name="all">Todos</string>
+    <string name="sort_order">Orden</string>
+    <string name="apply">Aplicar</string>
+    <string name="sort_default">Por defecto</string>
+    <string name="sort_id_asc">ID (Menor a Mayor)</string>
+    <string name="sort_id_desc">ID (Mayor a Menor)</string>
+    <string name="sort_name_asc">Nombre (A-Z)</string>
+    <string name="sort_name_desc">Nombre (Z-A)</string>
 </resources>

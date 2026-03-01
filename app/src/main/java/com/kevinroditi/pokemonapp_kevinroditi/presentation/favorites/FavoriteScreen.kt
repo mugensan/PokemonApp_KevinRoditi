@@ -21,8 +21,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.kevinroditi.pokemonapp_kevinroditi.R
 import com.kevinroditi.pokemonapp_kevinroditi.presentation.favorites.components.FavoriteItem
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -37,10 +39,13 @@ fun FavoriteScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Favorites") },
+                title = { Text(text = stringResource(R.string.favorites)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.back)
+                        )
                     }
                 }
             )
@@ -56,7 +61,10 @@ fun FavoriteScreen(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(text = "No favorites yet", style = MaterialTheme.typography.bodyLarge)
+                    Text(
+                        text = stringResource(R.string.no_favorites_yet),
+                        style = MaterialTheme.typography.bodyLarge
+                    )
                 }
             } else {
                 LazyColumn(
