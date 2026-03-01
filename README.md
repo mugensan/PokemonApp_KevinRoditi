@@ -1,5 +1,6 @@
 <table>
   <tr>
+    <td><img src="![Screenshot_20260301_150449_pokemonapp_kevinroditi](https://github.com/user-attachments/assets/df60e8aa-587b-4960-a44d-66553cde1bbf)" width="100%"></td>
     <td><img src="https://github.com/user-attachments/assets/f1b81dfa-6481-4d12-9f8f-5acd4d32390b" width="100%"></td>
     <td><img src="https://github.com/user-attachments/assets/8739b486-6a79-47d2-b22f-9915dcc42cc4" width="100%"></td>
     <td><img src="https://github.com/user-attachments/assets/9ecc5460-dab2-41a1-9521-a9c8f50243d3" width="100%"></td>
@@ -525,3 +526,4 @@ Este proyecto demuestra:
 - Estándares Android de nivel empresarial
 
 Representa preparación para entornos profesionales de desarrollo Android y aplicaciones reales escalables.
+
