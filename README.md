@@ -1,21 +1,17 @@
-<!-- Row 1 -->
-<img src="![1000023214](https://github.com/user-attachments/assets/17dba6a3-92dc-404f-9598-5cb20558b1a8)
-" width="32%" />
-<img src="![1000023217](https://github.com/user-attachments/assets/3c5ca8f2-7533-45cc-a77a-b3557c834175)
-" width="32%" />
-<img src="![1000023214](https://github.com/user-attachments/assets/8df3597e-f357-4277-9bed-a4076362a5d4)
-" width="32%" />
-<!-- Row 2 -->
-<img src="![1000023215](https://github.com/user-attachments/assets/f8e7a9c5-0197-4ace-8c21-b342812d080f)
-" width="32%" />
-<img src="![1000023219](https://github.com/user-attachments/assets/484c287d-115c-40a8-acdf-284345914f45)
-" width="32%" />
-<img src="![1000023220](https://github.com/user-attachments/assets/f552e8d3-81d0-4015-a9dc-7b0de098ed81)
-" width="32%" />
-
-
-
-
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/f1b81dfa-6481-4d12-9f8f-5acd4d32390b" width="100%"></td>
+    <td><img src="https://github.com/user-attachments/assets/8739b486-6a79-47d2-b22f-9915dcc42cc4" width="100%"></td>
+    <td><img src="https://github.com/user-attachments/assets/9ecc5460-dab2-41a1-9521-a9c8f50243d3" width="100%"></td>
+    
+    
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/353b684b-8383-4c7e-a5be-2126fff1d73b" width="100%"></td>
+    <td><img src="https://github.com/user-attachments/assets/38d048ee-2df9-4788-9827-045aaf97dc07" width="100%"></td>
+    <td><img src="https://github.com/user-attachments/assets/dff0851e-21f7-4f20-9018-9a5d40215ba4" width="100%"></td>
+  </tr>
+</table>
 
 # Pokédex – Enterprise-Grade Android Architecture Documentation
 Clean Architecture | Jetpack Compose | Kotlin | Coroutines | Flow | Hilt | Room | Paging3 | Material 3
@@ -29,7 +25,8 @@ This project’s active implementation resides in the `dev` branch.
 Before building the application:
 
 1. Clone the repository.
-2. Switch to the `dev` branch:3. Open the project in Android Studio (latest stable version recommended).
+2. Switch to the `dev` branch:
+3. Open the project in Android Studio (latest stable version recommended).
 4. Sync Gradle.
 5. Run the application on:
 - An Android Emulator (API 26+ recommended), or
@@ -1336,4 +1333,5 @@ Representa un estándar profesional de desarrollo Android moderno.
 =======
 Este proyecto demuestra no solo capacidad de implementación técnica, sino madurez arquitectónica, aplicando los patrones más avanzados del ecosistema Android actual.
 >>>>>>> 85f182e (Search and Favorites added)
+
 
